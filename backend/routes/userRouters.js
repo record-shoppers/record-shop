@@ -5,10 +5,11 @@ const {
     addUser,
     getUser,
     checkUser,
-    validateUser
+    validateUser,
+    validatePassword
 } = require('../controllers/userControllers');
 
-userRouters.route('/').get(getUsers).post(validateUser, addUser);
+userRouters.route('/').get(getUsers).post(validateUser, validatePassword, addUser);
 userRouters.route('/:id').get(checkUser, getUser);
 
 module.exports = userRouters;
