@@ -3,12 +3,14 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
 const userRouters = require('./routes/userRouters');
+const recordRouters = require('./routes/recordRouters');
 const PORT = 5001;
 
 //MIDDLEWARE
 app.use(cors());
 app.use(express.json());
 app.use('/users', userRouters);
+app.use('/records', recordRouters);
 
 //MONGODB SETUP
 mongoose
