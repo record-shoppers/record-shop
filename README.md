@@ -28,4 +28,4 @@ We use the __MERN__ stack.
 
 Sometimes we look out at the __MEAN__ stackers and think of crossing over, but __MERN__ will always be our first.
 
-#### _Peace & Code_
+### `_Peace & Code_`
