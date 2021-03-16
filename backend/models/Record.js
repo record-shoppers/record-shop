@@ -11,6 +11,6 @@ const recordSchema = new Schema({
     timestamps: true
 });
 
-const Records = model('Records', recordSchema);
+const Record = model('Record', recordSchema);
 
-module.exports = Records;
+module.exports = Record;
