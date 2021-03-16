@@ -38,10 +38,10 @@ const faker = require("faker");
         const userData = {
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
-            email: faker.internet.email(),
             nickname: faker.internet.userName(),
+            email: faker.internet.email(),
             password: "01234",
-            avatar: faker.internet.avatar(),
+            avatar: 'http://localhost:5001/statics/avatar.jpg',
         }
         const user = new User(userData)
         return user.save()
