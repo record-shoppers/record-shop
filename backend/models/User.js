@@ -7,7 +7,7 @@ const UserSchema = new Schema ({
     nickname: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    avatar: {type: String, default: 'http://localhost:5000/statics/avatar.jpg'}
+    avatar: {type: String, default: 'http://localhost:5001/statics/avatar.jpg'}
 }, {versionKey: false, timestamps: true})
 
 const User = model('User', UserSchema)

@@ -2,11 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
+const userRouters = require('./routes/userRouters');
 const PORT = 5001;
 
 //MIDDLEWARE
 app.use(cors());
 app.use(express.json());
+app.use('/users', userRouters);
 
 //MONGODB SETUP
 mongoose
