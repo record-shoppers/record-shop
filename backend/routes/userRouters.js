@@ -3,10 +3,12 @@ const userRouters = express.Router();
 const {
     getUsers,
     addUser,
-    getUser
+    getUser,
+    checkUser,
+    validateUser
 } = require('../controllers/userControllers');
 
-userRouters.route('/').get(getUsers).post(addUser);
-userRouters.route('/:id').get(getUser);
+userRouters.route('/').get(getUsers).post(validateUser, addUser);
+userRouters.route('/:id').get(checkUser, getUser);
 
 module.exports = userRouters;
