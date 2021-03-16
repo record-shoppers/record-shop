@@ -1,14 +1,22 @@
 {
-  "name": "backend",
+  "name": "record-shop",
   "version": "1.0.0",
-  "description": "",
+  "description": "In accordance with FbW36, we will create the best record shop in the world. Peace and code.",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/record-shoppers/record-shop.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/record-shoppers/record-shop/issues"
+  },
+  "homepage": "https://github.com/record-shoppers/record-shop#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
