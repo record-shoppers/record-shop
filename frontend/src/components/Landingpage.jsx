@@ -1,10 +1,10 @@
 import recordshop from '../assets/recordshop.jpg';
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Landingpage = () => {
 
     const Background = styled.div`
-    background: transparent url(${recordshop}) 0% 0% no-repeat padding-box;
+    background: url(${recordshop}) 0% 0% no-repeat padding-box;
 `;
 
     const Button = styled.a`

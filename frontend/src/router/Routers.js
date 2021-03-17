@@ -1,14 +1,18 @@
-import { BrowserRouter as Route, Switch, Router } from 'react-router-dom';
+import {Route, Switch, } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Landingpage from '../components/Landingpage';
+import Nav from "../components/Nav"
 
 const Routers = () => {
-    <Router>
+    return(
+        <>
+        <Nav/>
         <Switch>
             <Route path='/' component={Landingpage} exact />
             {/* <Route path='/dashboard' component={Dashboard} /> */}
         </Switch>
-    </Router>
+        </>
+    )
 }
 
 export default Routers;
