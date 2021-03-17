@@ -9,10 +9,15 @@ const Container = styled.main`
 
 const Section = styled.section`
   width: 50%;
-  margin: 50px auto;
+  margin: 30px auto;
   padding: 0 80px;
 `;
 
+const HeadingBold = styled.h3``;
+
+const HeadingNormal = styled.h4``;
+
+// main component
 export const SignUp = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
@@ -20,10 +25,10 @@ export const SignUp = () => {
   return (
     <Container>
       <Section>
-        <h2>Hurraaaaay!</h2>
-        <h2>Let us know who you are!</h2>
-        <p>We won't share info with anybody</p>
-        <p>I promise</p>
+        <HeadingBold>Hurraaaaay!</HeadingBold>
+        <HeadingBold>Let us know who you are!</HeadingBold>
+        <HeadingNormal>We won't share info with anybody</HeadingNormal>
+        <HeadingNormal>I promise</HeadingNormal>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             name="firstName"
