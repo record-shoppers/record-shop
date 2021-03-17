@@ -3,13 +3,15 @@ const userRouters = express.Router();
 const {
     getUsers,
     addUser,
-    getUser,
-    checkUser,
+    getUser
+} = require('../controllers/userControllers');
+const { 
     validateUser,
     validatePassword
-} = require('../controllers/userControllers');
+} = require('../middleware/validation');
+
 
 userRouters.route('/').get(getUsers).post(validateUser, validatePassword, addUser);
-userRouters.route('/:id').get(checkUser, getUser);
+userRouters.route('/:id').get(getUser);
 
 module.exports = userRouters;

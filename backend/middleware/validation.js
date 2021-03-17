@@ -13,11 +13,11 @@ exports.validateUser =(req, res, next) => {
 
 exports.validatePassword = (req, res, next) => {
     const {password} = req.body
-    const upper = /[A-Z]/,
-    const lower = /[a-z]/,
-    const number = /[0-9]/,
+    const upper = /[A-Z]/
+    const lower = /[a-z]/
+    const number = /[0-9]/
 
-    if(password.length > 6 && password.includes(upper, lower, number)) next()
+    if(password.length > 6 && password.match(upper, lower, number)) next()
     else {
         const error = new Error("Please make sure your password is correct!")
         error.status = 400
@@ -25,15 +25,14 @@ exports.validatePassword = (req, res, next) => {
     }   
 }
 
-exports.checkUser = async (req, res, next) => {
-    const {email, password} = req.body
+// exports.checkUser = (req, res, next) => {
+//     const {email, password} = req.body
 
-    let user = await User.findOne({email})
-
-    if(user && user.password === password) next()
-    else {
-        const error = new Error("Please make sure your email and password are correct!")
-        error.status = 400
-        next(error)
-    }
-}
+//     // let user = await User.findOne({email})
+//     if(email && password) next()
+//     else {
+//         const error = new Error("Please make sure your email and password are correct!")
+//         error.status = 400
+//         next(error)
+//     }
+// }
