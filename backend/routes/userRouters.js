@@ -5,8 +5,13 @@ const {
     addUser,
     getUser
 } = require('../controllers/userControllers');
+const { 
+    validateUser,
+    validatePassword
+} = require('../middleware/validation');
 
-userRouters.route('/').get(getUsers).post(addUser);
+
+userRouters.route('/').get(getUsers).post(validateUser, validatePassword, addUser);
 userRouters.route('/:id').get(getUser);
 
 module.exports = userRouters;

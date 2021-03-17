@@ -40,7 +40,7 @@ const faker = require("faker");
             lastName: faker.name.lastName(),
             nickname: faker.internet.userName(),
             email: faker.internet.email(),
-            password: "01234",
+            password: "01234Ab",
             avatar: 'http://localhost:5001/statics/avatar.jpg',
         }
         const user = new User(userData)
@@ -58,7 +58,8 @@ const faker = require("faker");
     .fill(null)
     .map(()=>{
         const recordData ={
-            cover: faker.image.abstract(),
+            cover: `${faker.image.abstract()}?random=${Date.now()}`
+            ,
             title: faker.lorem.words(),
             artist: faker.lorem.word(),
             year: faker.date.past(),
