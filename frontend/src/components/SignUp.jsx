@@ -1,56 +1,66 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useForm } from "react-hook-form";
+
+//styled components
+const Container = styled.main`
+  display: flex;
+  width: 100%;
+`;
+
+const Section = styled.section`
+  width: 50%;
+  margin: 50px auto;
+  padding: 0 80px;
+`;
 
 export const SignUp = () => {
-  const somethinToSave = false;
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords don't match");
-    }
-
-    try {
-      setError("");
-      setLoading(true);
-    } catch {
-      setError("Failed to create an account");
-    }
-
-    setLoading(false);
-  };
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
 
   return (
-    <section>
-      <h2>Sign up</h2>
-      {error && <h2>error}</h2>}
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <label>Email</label>
-          <input type="email" required ref={emailRef} />
-        </fieldset>
-        <fieldset>
-          <label>Password</label>
-          <input type="password" required ref={passwordRef} />
-        </fieldset>
-        <fieldset>
-          <label>Password Confirm</label>
-          <input type="password" required ref={passwordConfirmRef} />
-        </fieldset>
-        <button disabled={loading} type="submit">
-          Sign up
-        </button>
-      </form>
-      <div>
-        Already have an account? <Link to="/login">Log In</Link>
-      </div>
-    </section>
+    <Container>
+      <Section>
+        <h2>Hurraaaaay!</h2>
+        <h2>Let us know who you are!</h2>
+        <p>We won't share info with anybody</p>
+        <p>I promise</p>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            name="firstName"
+            ref={register({ required: true, maxLength: 25 })}
+            placeholder="First Name"
+          />
+          <input
+            name="lastName"
+            ref={register({ required: true, maxLength: 25 })}
+            placeholder="Last Name"
+          />
+          <input
+            name="email"
+            ref={register({ required: true })}
+            placeholder="Last Name"
+          />
+          <input
+            name="nickName"
+            ref={register({ required: true })}
+            placeholder="Nickname"
+          />
+          <input
+            name="password"
+            ref={register({ required: true })}
+            placeholder="Password"
+          />
+          <input
+            name="confirmPassword"
+            ref={register({ required: true })}
+            placeholder="Repeat password"
+          />
+          <input type="submit" />
+        </form>
+      </Section>
+      <Section>
+        <h2>I am an image</h2>
+      </Section>
+    </Container>
   );
 };
