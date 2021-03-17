@@ -1,4 +1,5 @@
 import recordshop from '../assets/recordshop.jpg';
+import styled from 'styled-components'
 
 const Landingpage = () => {
 
