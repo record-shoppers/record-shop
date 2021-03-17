@@ -25,14 +25,13 @@ exports.validatePassword = (req, res, next) => {
     }   
 }
 
-// exports.checkUser = (req, res, next) => {
-//     const {email, password} = req.body
+exports.checkUser = (req, res, next) => {
+    let user = User.findOne({ email: req.body.email, password: req.body.password})
 
-//     // let user = await User.findOne({email})
-//     if(email && password) next()
-//     else {
-//         const error = new Error("Please make sure your email and password are correct!")
-//         error.status = 400
-//         next(error)
-//     }
-// }
+    if(user) next()
+    else {
+        const error = new Error("Please make sure your email and password are correct!")
+        error.status = 400
+        next(error)
+    }
+}
