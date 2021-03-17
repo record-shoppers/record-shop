@@ -67,12 +67,11 @@ export const UserProfile = ()=>{
     const [selPicState, setSelePicState] = useState(Johnlenon)
 
     const handleClick = (e)=>{
-        setSelePicState(e.target.name);
+        const pic = e.target.src
+        setSelePicState(pic);
     }
 
     console.log(selPicState);
-
-
 
     return(
         <Main>
@@ -101,19 +100,15 @@ export const UserProfile = ()=>{
                         <img src={selPicState} alt="ghost ilustration" className="selected-pic" width="270px"/>
                     </SelectedPic>
                    <Thumbnails>
-                        <img src={Ghost} alt="ghost ilustration" className="selected-pic" width="75px"/>
-                        <button onClick={handleClick} padding="0">
-                            <img src={Johnlenon} alt="John Lennon illustration" width="75px" name="Johnlenon"/>
-                        </button>
-                        <button onClick={handleClick} padding="0">
-                            <img src={Melbourne} alt="Melbourne illustration" width="75px" name="Melbourne"/>
-                        </button>
-                        <img src={Record} alt="Record illustration" width="75px" name="Record"/>
-                        <img src={Watchout} alt="Watchout illustration" width="75px" name="Watchout"/>
-                        <img src={WeirdPig} alt="Weird Pig illustration" width="75px" name="WeirdPig"/>
-                        <img src={WeirdPriestress} alt="Weird Priestress illustration" width="75px" name="WeirdPriestress"/>
-                        <img src={Weirddog} alt="Weird dog illustration" width="75px" name="Weirddog"/>
-                        <img src={Wathever} alt="Whatever illustration" width="75px" name="Wathever"/>
+                        <img src={Ghost} alt="ghost ilustration" className="selected-pic" width="75px" name="Ghost" onClick={handleClick} />
+                        <img src={Johnlenon} alt="John Lennon illustration" width="75px" name="Johnlenon" onClick={handleClick} />
+                        <img src={Melbourne} alt="Melbourne illustration" width="75px" name="Melbourne" onClick={handleClick}/>
+                        <img src={Record} alt="Record illustration" width="75px" name="Record" onClick={handleClick}/>
+                        <img src={Watchout} alt="Watchout illustration" width="75px" name="Watchout" onClick={handleClick}/>
+                        <img src={WeirdPig} alt="Weird Pig illustration" width="75px" name="WeirdPig" onClick={handleClick}/>
+                        <img src={WeirdPriestress} alt="Weird Priestress illustration" width="75px" name="WeirdPriestress" onClick={handleClick}/>
+                        <img src={Weirddog} alt="Weird dog illustration" width="75px" name="Weirddog" onClick={handleClick}/>
+                        <img src={Wathever} alt="Whatever illustration" width="75px" name="Wathever" onClick={handleClick}/>
                    </Thumbnails>
                 </ImgContainer>
             </SectionContainer>
