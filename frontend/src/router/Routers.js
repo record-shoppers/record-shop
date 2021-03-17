@@ -4,12 +4,10 @@ import Landingpage from '../components/Landingpage';
 
 const Routers = () => {
     <Router>
-        <Header />
         <Switch>
             <Route path='/' component={Landingpage} exact />
-            <Route path='/dashboard' component={Dashboard} />
+            {/* <Route path='/dashboard' component={Dashboard} /> */}
         </Switch>
-        <Footer />
     </Router>
 }
 
