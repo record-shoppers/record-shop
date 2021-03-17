@@ -1,15 +1,17 @@
-import Homepage from "../components/LandingPage"
+import {Route, Switch, } from 'react-router-dom';
+import Dashboard from '../components/Dashboard';
+import Landingpage from '../components/Landingpage';
 import Nav from "../components/Nav"
-import { BrowserRouter as Route, Switch, Router, Link } from 'react-router-dom';
 
 const Routers = () => {
     return(
-    <Router>
+        <>
         <Nav/>
         <Switch>
-            <Route path='/' exact component={Homepage}  />
+            <Route path='/' component={Landingpage} exact />
+            <Route path='/dashboard' component={Dashboard} />
         </Switch>
-    </Router>
+        </>
     )
 }
 

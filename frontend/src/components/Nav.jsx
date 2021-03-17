@@ -32,18 +32,19 @@ const Signup = styled.div.attrs(props=>({
 `
 
 const Nav = () =>{  
+    
     return(
         <nav>
         <NavUl>
             <NavLi>
-                <Link to="/">RECORD STORE</Link>
+                <Link to="/" exact>RECORD STORE</Link>
             </NavLi>
             <LoginSignup>
                 <NavLi>
-                    <Link to="login">Login</Link>
+                    {/* <Link to="login">Login</Link> */}
                 </NavLi>
                 <NavLi className="signup">
-                    <Signup><Link to="signUp">Sign up</Link></Signup>
+                    {/* <Signup><Link to="signUp">Sign up</Link></Signup> */}
                 </NavLi>
             </LoginSignup>
         </NavUl>
