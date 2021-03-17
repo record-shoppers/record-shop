@@ -2,6 +2,7 @@ import {Route, Switch, } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Landingpage from '../components/Landingpage';
 import Nav from "../components/Nav"
+import "../css/App.css"
 
 const Routers = () => {
     return(
