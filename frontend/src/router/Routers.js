@@ -1,13 +1,16 @@
-import { BrowserRouter as Route, Switch, Router } from 'react-router-dom';
+import Homepage from "../components/LandingPage"
+import Nav from "../components/Nav"
+import { BrowserRouter as Route, Switch, Router, Link } from 'react-router-dom';
 
 const Routers = () => {
+    return(
     <Router>
-        <Header />
+        <Nav/>
         <Switch>
-            <Route path='/' component={ } exact />
+            <Route path='/' exact component={Homepage}  />
         </Switch>
-        <Footer />
     </Router>
+    )
 }
 
 export default Routers;

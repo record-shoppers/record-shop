@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 
 const NavUl = styled.ul`
@@ -31,26 +31,24 @@ const Signup = styled.div.attrs(props=>({
     border-radius: 30px;
 `
 
-
 const Nav = () =>{  
     return(
-        <Router>
         <nav>
         <NavUl>
             <NavLi>
-                <NavLink to="/">RECORD STORE</NavLink>
+                <Link to="/">RECORD STORE</Link>
             </NavLi>
             <LoginSignup>
                 <NavLi>
-                    <NavLink to="login">Login</NavLink>
+                    <Link to="login">Login</Link>
                 </NavLi>
                 <NavLi className="signup">
-                    <Signup><NavLink to="signUp">Sign up</NavLink></Signup>
+                    <Signup><Link to="signUp">Sign up</Link></Signup>
                 </NavLi>
             </LoginSignup>
         </NavUl>
         </nav>
-      </Router>
+
     )
 }
 
