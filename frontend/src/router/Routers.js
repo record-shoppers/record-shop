@@ -17,6 +17,7 @@ const Routers = () => {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/signup" component={SignUp} />
         <Route path='/userprofile' component={UserProfile} />
+        <Route path="/login" component={Login} />
       </Switch>
     </Router>
   );
