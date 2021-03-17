@@ -20,16 +20,14 @@ const LoginSignup = styled.div.attrs(props=>({
     classname:props.className
 }))`
     display: flex;
-    align-items: center; 
-`
+    align-items: center; `
 
 const Signup = styled.div.attrs(props=>({
     classname:props.className
 }))`
     background-color: white;
     padding: 10px 20px;
-    border-radius: 30px;
-`
+    border-radius: 30px;`
 
 const Nav = () =>{  
     
@@ -41,10 +39,10 @@ const Nav = () =>{
             </NavLi>
             <LoginSignup>
                 <NavLi>
-                    {/* <Link to="login">Login</Link> */}
+                    <Link to="login">Login</Link>
                 </NavLi>
                 <NavLi className="signup">
-                    {/* <Signup><Link to="signUp">Sign up</Link></Signup> */}
+                    <Signup><Link to="signUp">Sign up</Link></Signup>
                 </NavLi>
             </LoginSignup>
         </NavUl>
