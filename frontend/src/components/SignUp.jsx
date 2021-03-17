@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const SignUp = () => {
+  const somethinToSave = false;
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
