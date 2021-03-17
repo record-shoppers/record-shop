@@ -1,4 +1,5 @@
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Dashboard from "../components/Dashboard";
 import Landingpage from "../components/Landingpage";
 import Nav from "../components/Nav";
@@ -8,7 +9,7 @@ import "../css/App.css";
 
 const Routers = () => {
   return (
-    <>
+    <Router>
       <Nav />
       <Switch>
         <Route path="/" component={Landingpage} exact />
@@ -16,7 +17,7 @@ const Routers = () => {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
       </Switch>
-    </>
+    </Router>
   );
 };
 
