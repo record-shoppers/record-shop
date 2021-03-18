@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { GetRecord } from '../fetch/fetch';
-import { useDispatch } from 'react-redux';
-import { show } from '../actions/recordActions';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import { GetRecord } from "../fetch/fetch";
+import { useDispatch } from "react-redux";
+import { show } from "../actions/recordActions";
 
 const Grid = styled.ul`
   display: grid;
@@ -33,32 +33,46 @@ const FlexWrap = styled.div`
 const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-    useEffect(() => {
-        const getData = async () => {
-            let res = await GetRecord();
-            dispatch(show(res))
-        };
-        getData()
-    }, [])
+  useEffect(() => {
+    setLoading(true);
+    setError("");
+    try {
+      const getData = async () => {
+        let res = await GetRecord();
+        dispatch(show(res));
+        setLoading(false);
+      };
+      getData();
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+      setError(err);
+    }
+  }, []);
 
-
-    return (
-        <FlexWrap>
-            <h2>Dashboard</h2>
-            <p>Here you can find all our records.</p>
-            <Grid>
-                {(records && records.map(record => {
-                    return (
-                        <GridItems key={record._id}>
-                            <GridImage src={record.cover} alt="Record-Cover" />
-                        </GridItems>
-                    )
-                }))}
-            </Grid>
-        </FlexWrap>
-    )
-}
+  return (
+    <FlexWrap>
+      <h2>Dashboard</h2>
+      <p>Here you can find all our records.</p>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <Grid>
+          {records &&
+            records.map((record) => {
+              return (
+                <GridItems key={record._id}>
+                  <GridImage src={record.cover} alt="Record-Cover" />
+                </GridItems>
+              );
+            })}
+        </Grid>
+      )}
+    </FlexWrap>
+  );
+};
 
 export default Dashboard;
-
