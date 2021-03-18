@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 const userRouters = require('./routes/userRouters');
 const recordRouters = require('./routes/recordRouters');
+const loginRouters = require('./routes/loginRouters');
 const PORT = 5001;
 
 //MIDDLEWARE
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/users', userRouters);
 app.use('/records', recordRouters);
+app.use('/login', loginRouters);
 
 //MONGODB SETUP
 mongoose
@@ -30,3 +32,8 @@ mongoose
 app.listen(PORT, () => {
   console.log(`Backend initialised on port: ${PORT}`);
 });
+
+// ERROR HANDLER
+app.use(function errorHandler (err, req, res, next) {
+  res.status(err.status || 500).send({error: {message: err.message}})
+})
