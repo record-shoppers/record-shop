@@ -34,30 +34,31 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
 
-  useEffect(() => {
-    const getData = async () => {
-      let res = await GetRecord();
-      dispatch(show(res));
-    };
-    getData();
-  }, []);
+    useEffect(() => {
+        const getData = async () => {
+            let res = await GetRecord();
+            dispatch(show(res))
+        };
+        getData()
+    }, [])
 
-  return (
-    <FlexWrap>
-      <h2>Dashboard</h2>
-      <p>Here you can find all our records.</p>
-      <Grid>
-        {records &&
-          records.map((record) => {
-            return (
-              <GridItems key={record._id}>
-                <GridImage src={record.cover} alt='Record-Cover' />
-              </GridItems>
-            );
-          })}
-      </Grid>
-    </FlexWrap>
-  );
-};
+
+    return (
+        <FlexWrap>
+            <h2>Dashboard</h2>
+            <p>Here you can find all our records.</p>
+            <Grid>
+                {(records && records.map(record => {
+                    return (
+                        <GridItems key={record._id}>
+                            <GridImage src={record.cover} alt="Record-Cover" />
+                        </GridItems>
+                    )
+                }))}
+            </Grid>
+        </FlexWrap>
+    )
+}
 
 export default Dashboard;
+

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { addUser } from "../fetch/fetch";
 import randomMan from "../assets/singup-img/randomMan.png";
 
 //styled components
@@ -36,7 +37,6 @@ const Input = styled.input`
   outline: none;
 `;
 
-const Button = styled.button``;
 
 const Image = styled.div`
   background: url(${randomMan});
@@ -47,8 +47,14 @@ const Image = styled.div`
 
 // main component
 export const SignUp = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit, reset} = useForm();
+
+  const onSubmit = async (formData) =>{
+    const newUser = await addUser(formData)
+    console.log(formData);
+    console.log(newUser);
+    reset();
+  } 
 
   return (
     <Container>
@@ -73,24 +79,26 @@ export const SignUp = () => {
           <Input
             name="email"
             ref={register({ required: true })}
-            placeholder="Last Name"
+            placeholder="Email"
           />
           <Input
-            name="nickName"
+            name="nickname"
             ref={register({ required: true })}
             placeholder="Nickname"
           />
           <Input
+            type="password"
             name="password"
             ref={register({ required: true })}
             placeholder="Password"
           />
           <Input
+            type="password"
             name="confirmPassword"
             ref={register({ required: true })}
             placeholder="Repeat password"
           />
-          <Button type="submit">Create account</Button>
+          <button type="submit">Create account</button>
         </Form>
       </Section>
       <Section>

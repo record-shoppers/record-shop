@@ -18,5 +18,13 @@ export const GetUser = async (data) => {
         return res.data
     } catch (err) {
         console.log(err);
+
+
+export const addUser = async (formData) => {
+    try{
+        const newUser = await axios.post(`${URI}/users`, formData)
+        return newUser;
+    }catch(err){
+        console.log(err.response.data);
     }
 }

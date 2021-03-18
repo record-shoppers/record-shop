@@ -4,7 +4,7 @@ const initialState = '';
 
 export const recordReducer = (state = initialState, action) => {
     switch(action.type) {
-        case ACTION.SHOW:
+        case ACTION.CREATE_USER:
             return state = action.payload
         default:
             return state
