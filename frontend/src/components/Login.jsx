@@ -1,5 +1,5 @@
-import { Layout } from './LayoutStyles';
-import { Form, Input, Button, ImageContainer } from './FormStyles';
+import { Layout } from '../css/LayoutStyles';
+import { Form, Input, Button, ImageContainer } from '../css/FormStyles';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -31,16 +31,16 @@ export const Login = () => {
           placeholder='Email'
           ref={register({ required: true })}
         />
-        {errors.name && errors.name.type === 'required' && (
+        {errors.email && errors.email.type === 'required' && (
           <span>This is required</span>
         )}
         <Input
           name='password'
           type='password'
           placeholder='Password'
-          ref={register({ required: true, maxLength: 6 })}
+          ref={register({ required: true, minLength: 6 })}
         />
-        {errors.name && errors.name.type === 'required' && (
+        {errors.password && errors.password.type === 'required' && (
           <span>This is required</span>
         )}
         <Button type='submit'>Log in</Button>

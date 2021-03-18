@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 import { addUser } from "../fetch/fetch";
 import randomMan from "../assets/singup-img/randomMan.png";
-import { Layout } from "./LayoutStyles";
+import { Layout } from "../css/LayoutStyles";
 import {
   Form,
   Input,
   InputContainer,
   Button,
   ImageContainer,
-} from "./FormStyles";
+} from "../css/FormStyles";
 
 export const SignUp = () => {
   const { register, handleSubmit, reset} = useForm();
