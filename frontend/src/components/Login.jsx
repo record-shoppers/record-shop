@@ -29,11 +29,8 @@ export const Login = () => {
     width: 400px;
     margin-top: 40px;
     margin-right: 100px;
+    outline: none;
   `;
-
-  //   const Subtitle = styled.p`
-  //     margin-top: -15px;
-  //   `;
 
   const Input = styled.input`
     display: flex;
@@ -51,6 +48,7 @@ export const Login = () => {
     border-radius: 15px;
     font-weight: bold;
     margin-bottom: 40px;
+    outline: none;
   `;
 
   return (
