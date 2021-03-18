@@ -4,9 +4,12 @@ import Landingpage from "../components/Landingpage";
 import Nav from "../components/Nav";
 import {Login} from "../components/Login";
 import { SignUp } from "../components/SignUp";
+
+
 import "../css/App.css";
 
 const Routers = () => {
+ 
   return (
     <Router>
       <Nav />
