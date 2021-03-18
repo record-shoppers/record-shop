@@ -11,18 +11,26 @@ import {
   Button,
   ImageContainer,
 } from "./FormStyles";
+import { useState } from "react";
 
 export const SignUp = () => {
   let history = useHistory();
   const { register, handleSubmit, reset, errors} = useForm();
   
-  console.log(errors);
+  const [matchingPassword, setMatchingPassword ] = useState("");
+
 
   const onSubmit = async (formData) =>{
-    const newUser = await addUser(formData)
-    if(newUser) history.push("/userprofile")
-    reset();
+    if(formData.password === formData.confirmPassword){
+      const newUser = await addUser(formData)
+      if(newUser) history.push("/userprofile")
+      reset();
+    }else{
+      setMatchingPassword(false)
+    }
+    console.log(matchingPassword);
   } 
+
 
   return (
    <Layout>
@@ -78,6 +86,7 @@ export const SignUp = () => {
           style={errors.confirmPassword && {color:"red"}}
         />
         <Button type="submit">Create account</Button>
+        {matchingPassword===false && <p style={{color:"red"}}>Passwords do not match</p>}
       </Form>
 
       <ImageContainer>

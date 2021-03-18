@@ -33,6 +33,7 @@ export const UserProfile = ()=>{
     margin-top:5%`
 
     const NameInput = styled.div`
+    display:flex;
     input{
         width:48%;
        margin-right:10px;
@@ -52,7 +53,12 @@ export const UserProfile = ()=>{
         }`
 
     const SelectedPic = styled.div`
-        width:50%;`
+        width:50%;
+        img{
+            width:270px;
+            height:270px;
+        }
+        `
 
 
     const Thumbnails = styled.div`
@@ -62,6 +68,10 @@ export const UserProfile = ()=>{
         gap:10px;
         button{
             padding:0;
+        }
+        img{
+            width:75px;
+            height:75px;
         }
         `
 
@@ -98,18 +108,18 @@ export const UserProfile = ()=>{
                 <Parag>Omg. These are so cool. Tenk u Gabriel Hollington</Parag>
                 <ImgContainer>
                     <SelectedPic>
-                        <img src={selPicState} alt="ghost ilustration" className="selected-pic" width="270px"/>
+                        <img src={selPicState} alt="ghost ilustration" className="selected-pic" />
                     </SelectedPic>
                    <Thumbnails>
-                        <img src={Ghost} alt="ghost ilustration" className="selected-pic" width="75px" name="Ghost" onClick={handleClick} />
-                        <img src={Johnlenon} alt="John Lennon illustration" width="75px" name="Johnlenon" onClick={handleClick} />
-                        <img src={Melbourne} alt="Melbourne illustration" width="75px" name="Melbourne" onClick={handleClick}/>
-                        <img src={Record} alt="Record illustration" width="75px" name="Record" onClick={handleClick}/>
-                        <img src={Watchout} alt="Watchout illustration" width="75px" name="Watchout" onClick={handleClick}/>
-                        <img src={WeirdPig} alt="Weird Pig illustration" width="75px" name="WeirdPig" onClick={handleClick}/>
-                        <img src={WeirdPriestress} alt="Weird Priestress illustration" width="75px" name="WeirdPriestress" onClick={handleClick}/>
-                        <img src={Weirddog} alt="Weird dog illustration" width="75px" name="Weirddog" onClick={handleClick}/>
-                        <img src={Wathever} alt="Whatever illustration" width="75px" name="Wathever" onClick={handleClick}/>
+                        <img src={Ghost} alt="ghost ilustration" className="selected-pic"  name="Ghost" onClick={handleClick} />
+                        <img src={Johnlenon} alt="John Lennon illustration"  name="Johnlenon" onClick={handleClick} />
+                        <img src={Melbourne} alt="Melbourne illustration"  name="Melbourne" onClick={handleClick}/>
+                        <img src={Record} alt="Record illustration"  name="Record" onClick={handleClick}/>
+                        <img src={Watchout} alt="Watchout illustration"  name="Watchout" onClick={handleClick}/>
+                        <img src={WeirdPig} alt="Weird Pig illustration"  name="WeirdPig" onClick={handleClick}/>
+                        <img src={WeirdPriestress} alt="Weird Priestress illustration"  name="WeirdPriestress" onClick={handleClick}/>
+                        <img src={Weirddog} alt="Weird dog illustration"  name="Weirddog" onClick={handleClick}/>
+                        <img src={Wathever} alt="Whatever illustration"  name="Wathever" onClick={handleClick}/>
                    </Thumbnails>
                 </ImgContainer>
             </SectionContainer>
