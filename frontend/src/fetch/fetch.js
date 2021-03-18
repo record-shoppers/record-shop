@@ -18,7 +18,8 @@ export const GetUser = async (data) => {
         return res.data
     } catch (err) {
         console.log(err);
-
+    }
+}
 
 export const addUser = async (formData) => {
     try{
