@@ -57,6 +57,7 @@ const Dashboard = () => {
     <FlexWrap>
       <h2>Dashboard</h2>
       <p>Here you can find all our records.</p>
+      {error && <h1>{error}</h1>}
       {loading ? (
         <h1>Loading...</h1>
       ) : (
