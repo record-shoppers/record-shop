@@ -1,22 +1,17 @@
-import {useDispatch} from 'react-redux'
-import {show} from '../actions/recordActions'
+import axios from 'axios'
 
 
-const URI = 'http://localhost:5001/records';
+const URI = 'http://localhost:5001';
 
-const fetchData = async () => {
-    const dispatch = useDispatch();
+export const GetRecord = async () => {
     try {
-        const response = await fetch(URI);
-        const result = await response.json();
-        dispatch(show(result))
-    } catch (error) {
-        console.error('Error', error.message);
+        const data = await axios.get(`${URI}/records`);
+        return data
+    } catch (err) {
+        console.log(err);
     }
-    useEffect(() => {
-        
-        return () => {
-            cleanup
-        }
-    }, [input])
+}
+
+export const addUser = async () => {
+
 }
