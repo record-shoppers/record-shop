@@ -26,13 +26,10 @@ export const Login = () => {
   const Form = styled.form`
     display: flex;
     flex-direction: column;
-    min-width: 400px;
+    width: 400px;
     margin-top: 40px;
     margin-right: 100px;
-  `;
-
-  const Subtitle = styled.p`
-    margin-top: -15px;
+    outline: none;
   `;
 
   const Input = styled.input`
@@ -51,13 +48,14 @@ export const Login = () => {
     border-radius: 15px;
     font-weight: bold;
     margin-bottom: 40px;
+    outline: none;
   `;
 
   return (
     <LoginLayout>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>Welcome back!!</h1>
-        <Subtitle>Please fill in your credentials.</Subtitle>
+        <p>Please fill in your credentials.</p>
         <Input
           name='email'
           type='text'
