@@ -19,6 +19,7 @@ const Routers = () => {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path='/userprofile' component={UserProfile} />
+        <Route path="/login" component={Login} />
       </Switch>
     </Router>
   );
