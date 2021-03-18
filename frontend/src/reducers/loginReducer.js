@@ -1,10 +1,8 @@
-import { ACTION } from '../actions/types';
-
 const initialState = '';
 
-export const recordReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action) => {
     switch(action.type) {
-        case ACTION.SHOW:
+        case 'LOGIN':
             return state = action.payload
         default:
             return state
