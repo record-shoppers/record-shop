@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Dashboard from "../components/Dashboard";
@@ -10,17 +9,15 @@ import { UserProfile } from "../components/UserProfile";
 import "../css/App.css";
 
 const Routers = () => {
- 
   return (
     <Router>
       <Nav />
       <Switch>
-        <Route path="/" exact component={Landingpage}  />
+        <Route path="/" exact component={Landingpage} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path='/userprofile' component={UserProfile} />
-        <Route path="/login" component={Login} />
+        <Route path="/userprofile" component={UserProfile} />
       </Switch>
     </Router>
   );
