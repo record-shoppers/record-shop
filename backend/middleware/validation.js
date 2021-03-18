@@ -1,6 +1,3 @@
-const User = require('../models/User')
-const mongoose = require('mongoose')
-
 exports.validateUser =(req, res, next) => {
     const {firstName, lastName, nickname, email, password} = req.body
     if(firstName && lastName && nickname && password && email) next()
@@ -25,13 +22,4 @@ exports.validatePassword = (req, res, next) => {
     }   
 }
 
-exports.checkUser = (req, res, next) => {
-    let user = User.findOne({ email: req.body.email, password: req.body.password})
 
-    if(user) next()
-    else {
-        const error = new Error("Please make sure your email and password are correct!")
-        error.status = 400
-        next(error)
-    }
-}
