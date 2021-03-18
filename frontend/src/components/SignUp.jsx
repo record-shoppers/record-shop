@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { addUser } from "../fetch/fetch";
 import randomMan from "../assets/singup-img/randomMan.png";
 import { Layout } from "./LayoutStyles";
 import {
@@ -9,10 +10,15 @@ import {
   ImageContainer,
 } from "./FormStyles";
 
-// main component
 export const SignUp = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit, reset} = useForm();
+
+  const onSubmit = async (formData) =>{
+    const newUser = await addUser(formData)
+    console.log(formData);
+    console.log(newUser);
+    reset();
+  } 
 
   return (
     <Layout>
@@ -41,7 +47,7 @@ export const SignUp = () => {
           placeholder="Last Name"
         />
         <Input
-          name="nickName"
+          name="nickname"
           ref={register({ required: true })}
           placeholder="Nickname"
         />

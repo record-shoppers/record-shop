@@ -15,7 +15,7 @@ const Routers = () => {
     <Router>
       <Nav />
       <Switch>
-        <Route path="/" component={Landingpage} exact />
+        <Route path="/" exact component={Landingpage}  />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />

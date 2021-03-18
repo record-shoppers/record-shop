@@ -39,7 +39,8 @@ export const UserProfile = ()=>{
     }`
 
     const Button = styled.button`
-        float:right;`
+        float:right;
+        font-size:20px`
 
     const ImgContainer = styled.div`
         margin-top: 10%;

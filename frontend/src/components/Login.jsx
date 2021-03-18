@@ -1,16 +1,25 @@
-import { useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
-import login from "../assets/login.png";
 import { Layout } from "./LayoutStyles";
 import { Form, Input, Button, ImageContainer } from "./FormStyles";
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser } from '../actions/loginAction';
+import { GetUser } from '../fetch/fetch';
+import login from '../assets/login.png';
 
 export const Login = () => {
   const { register, handleSubmit, errors } = useForm();
-  //   const history = useHistory();
+  const history = useHistory();
+
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    // const user = await addUser(data);
-    // if (user) history.push('/dashboard');
+    let user = await GetUser(data);
+    console.log(user);
+    dispatch(loginUser(user));
+    if (user) history.push('/dashboard');
   };
 
   return (
