@@ -34,13 +34,13 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const records = useSelector((state) => state.recordReducer.data);
 
-useEffect(() => {
-    const getData = async () => {
-        let res = await GetRecord();
-        dispatch(show(res))
-      };
-  getData()
-}, [])
+    useEffect(() => {
+        const getData = async () => {
+            let res = await GetRecord();
+            dispatch(show(res))
+        };
+        getData()
+    }, [])
 
 
     return (
