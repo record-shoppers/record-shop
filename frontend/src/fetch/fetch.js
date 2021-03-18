@@ -12,6 +12,12 @@ export const GetRecord = async () => {
     }
 }
 
-export const addUser = async () => {
 
+export const addUser = async (formData) => {
+    try{
+        const newUser = await axios.post(`${URI}/users`, formData)
+        return newUser;
+    }catch(err){
+        console.log(err.response.data);
+    }
 }

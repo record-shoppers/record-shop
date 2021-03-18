@@ -4,6 +4,44 @@ import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import login from '../assets/login.png';
 
+const LoginLayout = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  margin: 0 100px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin-top: 40px;
+  margin-right: 100px;
+  outline: none;
+`;
+
+const Input = styled.input`
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-bottom: 1px solid black;
+  margin: 30px 0;
+`;
+
+const Button = styled.button`
+  width: 80px;
+  height: 30px;
+  align-self: flex-end;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  outline: none;
+`;
+
 export const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   //   const history = useHistory();
@@ -12,46 +50,6 @@ export const Login = () => {
     // const user = await addUser(data);
     // if (user) history.push('/dashboard');
   };
-
-  const LoginLayout = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 40px;
-    margin: 0 100px;
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
-  `;
-
-  const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    margin-top: 40px;
-    margin-right: 100px;
-  `;
-
-  //   const Subtitle = styled.p`
-  //     margin-top: -15px;
-  //   `;
-
-  const Input = styled.input`
-    display: flex;
-    flex-direction: column;
-    border: none;
-    border-bottom: 1px solid black;
-    margin: 30px 0;
-  `;
-
-  const Button = styled.button`
-    width: 80px;
-    height: 30px;
-    align-self: flex-end;
-    border: none;
-    border-radius: 15px;
-    font-weight: bold;
-    margin-bottom: 40px;
-  `;
 
   return (
     <LoginLayout>
