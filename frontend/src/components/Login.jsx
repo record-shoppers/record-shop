@@ -1,10 +1,8 @@
-import { Layout } from "./LayoutStyles";
-import { Form, Input, Button, ImageContainer } from "./FormStyles";
-import { useEffect } from 'react';
+import { Layout } from './LayoutStyles';
+import { Form, Input, Button, ImageContainer } from './FormStyles';
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginUser } from '../actions/loginAction';
 import { GetUser } from '../fetch/fetch';
 import login from '../assets/login.png';
@@ -28,31 +26,31 @@ export const Login = () => {
         <h1>Welcome back!!</h1>
         <p>Please fill in your credentials.</p>
         <Input
-          name="email"
-          type="text"
-          placeholder="Email"
+          name='email'
+          type='text'
+          placeholder='Email'
           ref={register({ required: true })}
         />
-        {errors.name && errors.name.type === "required" && (
+        {errors.name && errors.name.type === 'required' && (
           <span>This is required</span>
         )}
         <Input
-          name="password"
-          type="password"
-          placeholder="Password"
+          name='password'
+          type='password'
+          placeholder='Password'
           ref={register({ required: true, maxLength: 6 })}
         />
-        {errors.name && errors.name.type === "required" && (
+        {errors.name && errors.name.type === 'required' && (
           <span>This is required</span>
         )}
-        <Button type="submit">Log in</Button>
+        <Button type='submit'>Log in</Button>
         <p>
-          What? You do not have an account?{" "}
-          <Link to="/signup">Create one here!</Link>
+          What? You do not have an account?{' '}
+          <Link to='/signup'>Create one here!</Link>
         </p>
       </Form>
       <ImageContainer>
-        <img src={login} alt="login" />
+        <img src={login} alt='login' />
       </ImageContainer>
     </Layout>
   );
