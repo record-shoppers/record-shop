@@ -14,6 +14,7 @@ export const Login = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
+    console.log('submit');
     let user = await GetUser(data);
     console.log(user);
     dispatch(loginUser(user));
@@ -22,7 +23,7 @@ export const Login = () => {
 
   return (
     <Layout>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
         <h1>Welcome back!!</h1>
         <p>Please fill in your credentials.</p>
         <Input
@@ -42,6 +43,9 @@ export const Login = () => {
         />
         {errors.password && errors.password.type === 'required' && (
           <span>This is required</span>
+        )}
+        {errors.password && errors.password.type === 'minLength' && (
+          <span>Please provide min 6 charactors</span>
         )}
         <Button type='submit'>Log in</Button>
         <p>
