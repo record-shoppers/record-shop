@@ -1,5 +1,5 @@
-import { Layout } from './LayoutStyles';
-import { Form, Input, Button, ImageContainer } from './FormStyles';
+import { Layout } from '../css/LayoutStyles';
+import { Form, Input, Button, ImageContainer } from '../css/FormStyles';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
