@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { addUser } from '../fetch/fetch';
 import randomMan from '../assets/singup-img/randomMan.png';
-import { Layout } from './LayoutStyles';
+import { Layout } from '../css/LayoutStyles';
 
 import {
   Form,
@@ -10,7 +10,7 @@ import {
   InputContainer,
   Button,
   ImageContainer,
-} from './FormStyles';
+} from '../css/FormStyles';
 import { useState } from 'react';
 
 export const SignUp = () => {
