@@ -14,9 +14,8 @@ export const Login = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    console.log('submit');
     let user = await GetUser(data);
-    console.log(user);
+
     dispatch(loginUser(user));
     if (user) history.push('/dashboard');
   };
