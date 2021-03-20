@@ -5,30 +5,33 @@ import { GetRecord } from '../fetch/fetch';
 import { useDispatch } from 'react-redux';
 import { show } from '../actions/recordActions';
 
-const Grid = styled.ul`
+const FlexWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  margin: 10px;
+`;
+
+const Title = styled.h3`
+  margin-bottom: 10px;
+`;
+
+const Grid = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: repeat(4, auto);
-  grid-gap: 3rem;
+  grid-gap: 4rem;
   justify-content: center;
-  padding-top: 3rem;
+  padding-top: 5rem;
 `;
 
-const GridItems = styled.li`
-  width: 300px;
-  height: 300px;
-  list-style-type: none;
-  justify-self: center;
+const GridItems = styled.div`
+  box-shadow: 1px 1px 2px 1px #727272;
 `;
 
 const GridImage = styled.img`
   width: 100%;
   height: 100%;
-`;
-const FlexWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
 `;
 
 const Dashboard = () => {
@@ -56,7 +59,7 @@ const Dashboard = () => {
 
   return (
     <FlexWrap>
-      <h2>Dashboard</h2>
+      <Title>Dashboard</Title>
       <p>Here you can find all our records.</p>
       {error && <h1>{error}</h1>}
       {loading ? (
