@@ -66,17 +66,12 @@ const Nav = () => {
           </NavLi>
         )}
 
-<<<<<<< HEAD
-        {token ? (
-          <UserAvatar src={picture} alt="Profile Picture" onClick={goToProfile}/>
-=======
         {user ? (
           <UserAvatar
             src={picture}
             alt='Profile Picture'
             onClick={goToProfile}
           />
->>>>>>> main
         ) : (
           <LoginSignup>
             <NavLi>

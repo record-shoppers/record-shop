@@ -38,7 +38,8 @@ const GridImage = styled.img`
 const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
-  const userLoggedIn = useSelector((state)=> state.loginReducer);
+  const user = useSelector((state)=> state.loginReducer);
+  console.log(user.loggedin);
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -60,11 +61,12 @@ const Dashboard = () => {
     }
   }, []);
 
-  if(!userLoggedIn) history.push("/")
+  if(!user.loggedin) history.push("/")
   return (
     <FlexWrap>
       <Title>Dashboard</Title>
-      <p>Here you can find all our records.</p>
+      <p>Hello, . Here you can find all our records.</p>
+
       {error && <h1>{error}</h1>}
       {loading ? (
         <h1>Loading...</h1>
