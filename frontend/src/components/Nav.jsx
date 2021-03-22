@@ -37,7 +37,7 @@ const Signup = styled.div.attrs((props) => ({
   border-radius: 30px;
 `;
 
-const UserAvatar = styled.div`
+const UserAvatar = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -50,6 +50,7 @@ const UserAvatar = styled.div`
 
 const Nav = () => {
   const user = useSelector((state) => state.loginReducer);
+  const picture = useSelector((state) => state.profileReducer);
   const history = useHistory();
   const goToProfile = () => {
     history.push('/userprofile');
@@ -69,7 +70,7 @@ const Nav = () => {
         )}
 
         {user ? (
-          <UserAvatar onClick={goToProfile}>{user.nickname[0]}</UserAvatar>
+          <UserAvatar src={picture} alt="Profile Picture" onClick={goToProfile}/>
         ) : (
           <LoginSignup>
             <NavLi>
