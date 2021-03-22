@@ -4,10 +4,10 @@ const jwt = require("jsonwebtoken")
 exports.checkUser = async (req, res, next) => {
     const {email, password} = req.body
     try {
-
+        console.log(email, password);
         const user = await User.findOne({ email, password })
-        if (!user) return res.status(404).json({ message: "The user does not exist!" })
         console.log(user);
+        if (!user) return res.status(404).json({ message: "The user does not exist!" })
 
         // if (user.password != req.body.password) return res.status(400).json({ message: "Password is not valid!" })
 
