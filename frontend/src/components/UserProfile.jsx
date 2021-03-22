@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components'
 import Johnlenon from "../assets/John+Lennon.jpg"
 import Ghost from "../assets/Ghost.JPG"
@@ -77,12 +78,15 @@ export const UserProfile = () => {
         `
     const dispatch = useDispatch();
     const picture = useSelector((state) => state.profileReducer)
+    const userLoggedIn = useSelector((state)=> state.loginReducer);
+    const history = useHistory();
 
     const handleClick = (e) => {
         const pic = e.target.src
         dispatch(saveProfile(pic))
     }
 
+    if(!userLoggedIn) history.push("/")
     return (
         <Main>
             <LeftSection>
