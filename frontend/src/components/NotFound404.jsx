@@ -20,6 +20,7 @@ const GoBackButton = styled.button`
 
 export const NotFound404 = () => {
   const history = useHistory();
+
   return (
     <Main>
       <Title>404</Title>
