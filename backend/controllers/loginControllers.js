@@ -15,7 +15,7 @@ exports.checkUser = async (req, res, next) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ data: user });
+    res.status(200).json({ user });
   } catch (err) {
     res.status(500).json({ message: "something went wrong!" });
   }

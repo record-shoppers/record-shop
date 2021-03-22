@@ -1,61 +1,61 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import styled from 'styled-components';
-import Johnlenon from '../assets/John+Lennon.jpg';
-import Ghost from '../assets/Ghost.JPG';
-import Melbourne from '../assets/Melbourne.JPG';
-import Watchout from '../assets/watchout.jpg';
-import Weirddog from '../assets/weirddog.jpg';
-import WeirdPig from '../assets/weirdpig.jpg';
-import WeirdPriestress from '../assets/weirdpriestess.jpg';
-import Wathever from '../assets/Whatever.jpg';
-import Record from '../assets/recordjpg.jpg';
-import { saveProfile } from '../actions/profileActions';
+import styled from "styled-components";
+import Johnlenon from "../assets/John+Lennon.jpg";
+import Ghost from "../assets/Ghost.JPG";
+import Melbourne from "../assets/Melbourne.JPG";
+import Watchout from "../assets/watchout.jpg";
+import Weirddog from "../assets/weirddog.jpg";
+import WeirdPig from "../assets/weirdpig.jpg";
+import WeirdPriestress from "../assets/weirdpriestess.jpg";
+import Wathever from "../assets/Whatever.jpg";
+import Record from "../assets/recordjpg.jpg";
+import { saveProfile } from "../actions/profileActions";
 import { updateAvatar, updateInformation } from "../fetch/fetch";
-import { SectionContainer, LeftSection, ImgContainer, Main} from '../css/LayoutStyles';
-import { Button,NameInput } from '../css/FormStyles';
+import {
+  SectionContainer,
+  LeftSection,
+  ImgContainer,
+  Main,
+} from "../css/LayoutStyles";
+import { Button, NameInput } from "../css/FormStyles";
+import { loginUser } from "../actions/loginAction";
 
+const RightSection = styled.div`
+  background-color: #f1efff;
 
-
-  const RightSection = styled.div`
-    background-color: #f1efff;
-
-    width: 100%;
-  `;
-
-  
+  width: 100%;
+`;
 
 const SelectedPic = styled.div`
-    img {
-      width: 220px;
-      height: 220px;
-    }
-  `;
+  img {
+    width: 220px;
+    height: 220px;
+  }
+`;
 
- const Thumbnails = styled.div`
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    img {
-      width: 60px;
-      height: 60px;
-    }
-  `;
+const Thumbnails = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  img {
+    width: 60px;
+    height: 60px;
+  }
+`;
 
 export const UserProfile = () => {
-  
-   const history = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
-  const user = useSelector((state) => state.loginReducer);
-  const [selectedPic, setSelectedPic] = useState('');
+  const user = useSelector((state) => state.loginReducer.user);
+  const [selectedPic, setSelectedPic] = useState("");
   const [userInformation, setUserInformation] = useState({
     firstName: "",
     lastName: "",
-    email: user.user.data.email,
-    password: user.user.data.password,
+    email: "",
+    password: "",
   });
 
   const changeHanler = (e) => {
@@ -64,7 +64,7 @@ export const UserProfile = () => {
 
   const handleClick = async (e) => {
     const pic = e.target.src;
-    let updatedAvatar = await updateAvatar(user.user.data._id, pic);
+    let updatedAvatar = await updateAvatar(user._id, pic);
     dispatch(saveProfile(pic));
     setSelectedPic(e.target.name);
   };
@@ -73,10 +73,11 @@ export const UserProfile = () => {
     e.preventDefault();
     if (userInformation.firstName && userInformation.lastName) {
       let updatedInformation = await updateInformation(
-        user.user.data._id,
+        user._id,
         userInformation
       );
-      history.push("/dashboard");
+      console.log(updatedInformation.data);
+      dispatch(loginUser(updatedInformation.data));
     }
   };
 
@@ -85,26 +86,23 @@ export const UserProfile = () => {
       <LeftSection>
         <SectionContainer>
           <h1>
-            Your Profile, {user.user.data.firstName} {user.user.data.lastName}
+            Your Profile, {user && user.firstName} {user && user.lastName}
           </h1>
-          <p>
-            Don't Forget to click the save button before you are gone
-          </p>
-
+          <p>Don't Forget to click the save button before you are gone</p>
 
           <form onSubmit={handleSubmit}>
             <NameInput>
               <input
                 type="text"
                 name="firstName"
-                placeholder={user.user.data.firstName}
+                placeholder={user && user.firstName}
                 onChange={changeHanler}
                 value={userInformation.firstName}
               />
               <input
                 type="text"
                 name="lastName"
-                placeholder={user.user.data.lastName}
+                placeholder={user && user.lastName}
                 onChange={changeHanler}
                 value={userInformation.lastName}
               />
@@ -112,12 +110,16 @@ export const UserProfile = () => {
             <input
               type="email"
               name="email"
-              placeholder={user.user.data.email}
+              placeholder={user && user.email}
+              onChange={changeHanler}
+              value={userInformation.email}
             />
             <input
               type="password"
               name="password"
-              placeholder={user.user.data.password}
+              placeholder={user && user.password}
+              onChange={changeHanler}
+              value={userInformation.password}
             />
             <Button type="submit">Save</Button>
           </form>

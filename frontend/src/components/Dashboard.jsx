@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import styled from 'styled-components';
-import { GetRecord } from '../fetch/fetch';
-import { useDispatch } from 'react-redux';
-import { show } from '../actions/recordActions';
+import styled from "styled-components";
+import { GetRecord } from "../fetch/fetch";
+import { useDispatch } from "react-redux";
+import { show } from "../actions/recordActions";
 
 const FlexWrap = styled.div`
   display: flex;
@@ -38,15 +38,15 @@ const GridImage = styled.img`
 const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
-  const user = useSelector((state)=> state.loginReducer);
-  
+  const user = useSelector((state) => state.loginReducer.user.user);
+
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const getData = async () => {
         let res = await GetRecord();
@@ -61,11 +61,11 @@ const Dashboard = () => {
     }
   }, []);
 
-  if(!user.loggedin) history.push("/")
+  //if (!user.loggedin) history.push("/");
   return (
     <FlexWrap>
       <Title>Dashboard</Title>
-      <p>Hello, {user.user.data.nickname}. Here you can find all our records.</p>
+      <p>Hello, {user.nickname}. Here you can find all our records.</p>
 
       {error && <h1>{error}</h1>}
       {loading ? (
@@ -76,7 +76,7 @@ const Dashboard = () => {
             records.map((record) => {
               return (
                 <GridItems key={record._id}>
-                  <GridImage src={record.cover} alt='Record-Cover' />
+                  <GridImage src={record.cover} alt="Record-Cover" />
                 </GridItems>
               );
             })}
