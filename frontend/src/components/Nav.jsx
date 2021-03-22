@@ -29,6 +29,7 @@ const LoginSignup = styled.div.attrs((props) => ({
 const Signup = styled.div.attrs((props) => ({
   classname: props.className,
 }))`
+  width:105px;
   background-color: white;
   padding: 10px 20px;
   border-radius: 30px;

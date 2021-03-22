@@ -10,61 +10,13 @@ import WeirdPriestress from '../assets/weirdpriestess.jpg';
 import Wathever from '../assets/Whatever.jpg';
 import Record from '../assets/recordjpg.jpg';
 import { saveProfile } from '../actions/profileActions';
+import { SectionContainer, LeftSection, ImgContainer, Main} from '../css/LayoutStyles';
+import {Button,NameInput} from '../css/FormStyles';
 
 export const UserProfile = () => {
-  const Main = styled.main`
-    display: flex;
-    height: 100%;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
-  `;
-
-  const LeftSection = styled.div`
-    width: 100%;
-    @media (max-width: 768px) {
-      margin-bottom: 30px;
-    }
-  `;
-
   const RightSection = styled.div`
-    background-color: #f1efff;
     width: 100%;
-  `;
-
-  const SectionContainer = styled.div`
-    margin: 10% auto;
-    width: 75%;
-  `;
-
-  const Parag = styled.p`
-    margin-top: 5%;
-  `;
-
-  const NameInput = styled.div`
-    display: flex;
-    input {
-      width: 48%;
-      margin-right: 10px;
-    }
-  `;
-
-  const Button = styled.button`
-    float: right;
-    font-size: 20px;
-  `;
-
-  const ImgContainer = styled.div`
-    margin-top: 10%;
-    display: flex;
-    img {
-      margin: 10px;
-    }
-
-    @media (max-width: 920px) {
-      flex-direction: column;
-    }
+    background-color: #f1efff;
   `;
 
   const SelectedPic = styled.div`
@@ -99,10 +51,8 @@ export const UserProfile = () => {
       <LeftSection>
         <SectionContainer>
           <h1>Your Profile, Mr.Wasabis</h1>
-          <Parag>
-            Don't Forget to click the save button before you are gone
-          </Parag>
-
+          <p>Don't Forget to click the save button before you are gone</p>
+          
           <form>
             <NameInput>
               <input type='text' name='firstName' placeholder='Steve' />
@@ -117,7 +67,7 @@ export const UserProfile = () => {
       <RightSection>
         <SectionContainer>
           <h1>You can update your supa kewl profile pic</h1>
-          <Parag>Omg. These are so cool. Tenk u Gabriel Hollington</Parag>
+          <p>Omg. These are so cool. Tenk u Gabriel Hollington</p>
           <ImgContainer>
             <SelectedPic>
               <img
