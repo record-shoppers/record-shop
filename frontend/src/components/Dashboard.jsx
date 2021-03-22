@@ -1,44 +1,48 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { GetRecord } from "../fetch/fetch";
-import { useDispatch } from "react-redux";
-import { show } from "../actions/recordActions";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { GetRecord } from '../fetch/fetch';
+import { useDispatch } from 'react-redux';
+import { show } from '../actions/recordActions';
 
-const Grid = styled.ul`
+const FlexWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  margin: 10px;
+`;
+
+const Title = styled.h3`
+  margin-bottom: 10px;
+`;
+
+const Grid = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: repeat(4, auto);
-  grid-gap: 3rem;
+  grid-gap: 4rem;
   justify-content: center;
-  padding-top: 3rem;
+  padding-top: 5rem;
 `;
 
-const GridItems = styled.li`
-  width: 300px;
-  height: 300px;
-  list-style-type: none;
-  justify-self: center;
+const GridItems = styled.div`
+  box-shadow: 1px 1px 2px 1px #727272;
 `;
 
 const GridImage = styled.img`
   width: 100%;
   height: 100%;
 `;
-const FlexWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setLoading(true);
-    setError("");
+    setError('');
     try {
       const getData = async () => {
         let res = await GetRecord();
@@ -55,7 +59,7 @@ const Dashboard = () => {
 
   return (
     <FlexWrap>
-      <h2>Dashboard</h2>
+      <Title>Dashboard</Title>
       <p>Here you can find all our records.</p>
       {error && <h1>{error}</h1>}
       {loading ? (
@@ -66,7 +70,7 @@ const Dashboard = () => {
             records.map((record) => {
               return (
                 <GridItems key={record._id}>
-                  <GridImage src={record.cover} alt="Record-Cover" />
+                  <GridImage src={record.cover} alt='Record-Cover' />
                 </GridItems>
               );
             })}
