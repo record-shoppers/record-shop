@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Johnlenon from '../assets/John+Lennon.jpg';
@@ -85,13 +86,12 @@ export const UserProfile = () => {
   `;
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
+  const [selectedPic, setSelectedPic] = useState('');
 
-  let selectedPic = '';
   const handleClick = (e) => {
     const pic = e.target.src;
     dispatch(saveProfile(pic));
-    selectedPic = e.target.name;
-    console.log(e.target.name);
+    setSelectedPic(e.target.name);
   };
 
   return (
