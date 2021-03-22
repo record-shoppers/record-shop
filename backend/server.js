@@ -15,7 +15,7 @@ app.use('/records', recordRouters);
 app.use('/login', loginRouters);
 
 //MONGODB SETUP
-const dbString = `mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/recordstoredb?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
+const dbString = `mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
 const dbOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
