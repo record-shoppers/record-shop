@@ -46,9 +46,7 @@ const Nav = () => {
   const picture = useSelector((state) => state.profileReducer);
   const history = useHistory();
   window.localStorage.setItem('access_token', user.token)
-  // window.localStorage.setItem('profile_picture', picture)
   const token = window.localStorage.getItem('access_token')
-  // const profilePicture = window.localStorage.getItem('profile_picture')
   const goToProfile = () => {
     history.push('/userprofile');
   };
@@ -66,17 +64,8 @@ const Nav = () => {
           </NavLi>
         )}
 
-<<<<<<< HEAD
         {token ? (
           <UserAvatar src={picture} alt="Profile Picture" onClick={goToProfile}/>
-=======
-        {user ? (
-          <UserAvatar
-            src={picture}
-            alt='Profile Picture'
-            onClick={goToProfile}
-          />
->>>>>>> main
         ) : (
           <LoginSignup>
             <NavLi>
