@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { GetRecord } from '../fetch/fetch';
 import { useDispatch } from 'react-redux';
@@ -37,6 +38,8 @@ const GridImage = styled.img`
 const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
+  const userLoggedIn = useSelector((state)=> state.loginReducer);
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -57,6 +60,7 @@ const Dashboard = () => {
     }
   }, []);
 
+  if(!userLoggedIn) history.push("/")
   return (
     <FlexWrap>
       <Title>Dashboard</Title>
