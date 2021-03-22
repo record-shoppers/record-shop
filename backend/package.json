@@ -23,7 +23,6 @@
     "express": "^4.17.1",
     "faker": "^5.4.0",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.6.5",
     "mongoose": "^5.12.1"
   }
 }
