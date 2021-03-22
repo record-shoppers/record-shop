@@ -78,7 +78,7 @@ export const UserProfile = () => {
         `
     const dispatch = useDispatch();
     const picture = useSelector((state) => state.profileReducer)
-    const userLoggedIn = useSelector((state)=> state.loginReducer);
+    const user = useSelector((state)=> state.loginReducer);
     const history = useHistory();
 
     const handleClick = (e) => {
@@ -86,7 +86,7 @@ export const UserProfile = () => {
         dispatch(saveProfile(pic))
     }
 
-    if(!userLoggedIn) history.push("/")
+    if(!user.loggedin) history.push("/")
     return (
         <Main>
             <LeftSection>
