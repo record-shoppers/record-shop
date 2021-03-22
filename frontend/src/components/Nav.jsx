@@ -69,7 +69,7 @@ const Nav = () => {
         )}
 
         {user ? (
-          <UserAvatar onClick={goToProfile}>{user.nickname[0]}</UserAvatar>
+          <UserAvatar onClick={goToProfile}>{user.nickname}</UserAvatar>
         ) : (
           <LoginSignup>
             <NavLi>
