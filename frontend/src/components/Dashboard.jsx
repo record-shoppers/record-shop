@@ -39,7 +39,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
   const user = useSelector((state)=> state.loginReducer);
-  console.log(user.loggedin);
+  
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
