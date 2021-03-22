@@ -13,11 +13,12 @@ export const Login = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = async (data) => {
-    let user = await GetUser(data);
-    console.log(user);
-    dispatch(loginUser(user));
-    if (user) history.push('/dashboard');
+  const onSubmit = (data) => {
+    console.log(data );
+    let user = GetUser(data);
+    if (user) {
+     return (dispatch(loginUser()), history.push('/dashboard'))
+    }
   };
 
   return (

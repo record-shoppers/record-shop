@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React, {useState} from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { addUser } from "../fetch/fetch";
@@ -10,12 +11,7 @@ import {
   InputContainer,
   Button,
   ImageContainer,
-<<<<<<< HEAD
 } from "../css/FormStyles";
-=======
-} from "./FormStyles";
-import { useState } from "react";
->>>>>>> main
 
 export const SignUp = () => {
   let history = useHistory();

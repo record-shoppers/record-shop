@@ -1,11 +1,11 @@
 import { ACTION } from '../actions/types';
 
-const initialState = '';
+const initialState = false;
 
 export const loginReducer = (state = initialState, action) => {
     switch(action.type) {
         case ACTION.LOGIN:
-            return state = action.payload
+            return state = true
         default:
             return state
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { useSelector } from "react-redux";
 
 const NavUl = styled.ul`
     background-color: #F2F2F2;
@@ -16,36 +17,48 @@ const NavUl = styled.ul`
 const NavLi = styled.li`
 margin: 10px;`
 
-const LoginSignup = styled.div.attrs(props=>({
-    classname:props.className
+const LoginSignup = styled.div.attrs(props => ({
+    classname: props.className
 }))`
     display: flex;
     align-items: center; `
 
-const Signup = styled.div.attrs(props=>({
-    classname:props.className
+const Signup = styled.div.attrs(props => ({
+    classname: props.className
 }))`
     background-color: white;
     padding: 10px 20px;
     border-radius: 30px;`
 
-const Nav = () =>{  
-    
-    return(
+const ImgContainer = styled.div`
+display:flex;
+width: 50px;
+img{
+    border-radius:50%;
+    border: 2px solid #EEA668;
+}`
+
+const Nav = () => {
+const picture = useSelector(state => state.profileReducer);
+const loggedin = useSelector(state => state.loginReducer);
+
+    return (
         <nav>
-        <NavUl>
-            <NavLi>
-                <Link to="/" exact>RECORD STORE</Link>
-            </NavLi>
-            <LoginSignup>
+            <NavUl>
                 <NavLi>
-                    <Link to="login">Login</Link>
+                    <Link to="/" exact>RECORD STORE</Link>
                 </NavLi>
-                <NavLi className="signup">
-                    <Signup><Link to="signUp">Sign up</Link></Signup>
-                </NavLi>
-            </LoginSignup>
-        </NavUl>
+                {
+                    loggedin ? <ImgContainer><Link to="userprofile"><img src={picture} alt="User Avatar" /></Link></ImgContainer> : <LoginSignup>
+                        <NavLi>
+                            <Link to="login">Login</Link>
+                        </NavLi>
+                        <NavLi className="signup">
+                            <Signup><Link to="signUp">Sign up</Link></Signup>
+                        </NavLi>
+                    </LoginSignup>
+                }
+            </NavUl>
         </nav>
 
     )

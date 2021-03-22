@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components'
 import Johnlenon from "../assets/John+Lennon.jpg"
 import Ghost from "../assets/Ghost.JPG"
@@ -9,9 +9,10 @@ import WeirdPig from "../assets/weirdpig.jpg"
 import WeirdPriestress from "../assets/weirdpriestess.jpg"
 import Wathever from "../assets/Whatever.jpg"
 import Record from "../assets/recordjpg.jpg"
+import { saveProfile } from "../actions/profileActions";
 
 
-export const UserProfile = ()=>{
+export const UserProfile = () => {
 
     const Main = styled.main`
     display:flex;
@@ -25,7 +26,7 @@ export const UserProfile = ()=>{
     background-color:#F1EFFF;
     width:50%`
 
-    const SectionContainer =styled.div`
+    const SectionContainer = styled.div`
     margin:10% auto;
     width:70%`
 
@@ -74,56 +75,54 @@ export const UserProfile = ()=>{
             height:75px;
         }
         `
+    const dispatch = useDispatch();
+    const picture = useSelector((state) => state.profileReducer)
 
-    const [selPicState, setSelePicState] = useState(Johnlenon)
-
-    const handleClick = (e)=>{
+    const handleClick = (e) => {
         const pic = e.target.src
-        setSelePicState(pic);
+        dispatch(saveProfile(pic))
     }
 
-    console.log(selPicState);
-
-    return(
+    return (
         <Main>
-        <LeftSection>
-            <SectionContainer>
-                <h1>Your Profile, Mr.Wasabis</h1>
-                <Parag>Don't Forget to click the save button before you are gone</Parag>
-            
-            <form>
-                <NameInput>
-                    <input type="text" name="firstName" placeholder="Steve" />
-                    <input type="text" name="lastName" placeholder="Steveson"/>
-                </NameInput>
-                <input type="email" name="email" placeholder="me@gmail.com"/>
-                <input type="password" name="password" placeholder="01234"/>
-                <Button>Save</Button>
-            </form>
-            </SectionContainer>
-        </LeftSection>
-        <RightSection>
-            <SectionContainer>
-                <h1>You can update your supa kewl profile pic</h1>
-                <Parag>Omg. These are so cool. Tenk u Gabriel Hollington</Parag>
-                <ImgContainer>
-                    <SelectedPic>
-                        <img src={selPicState} alt="ghost ilustration" className="selected-pic" />
-                    </SelectedPic>
-                   <Thumbnails>
-                        <img src={Ghost} alt="ghost ilustration" className="selected-pic"  name="Ghost" onClick={handleClick} />
-                        <img src={Johnlenon} alt="John Lennon illustration"  name="Johnlenon" onClick={handleClick} />
-                        <img src={Melbourne} alt="Melbourne illustration"  name="Melbourne" onClick={handleClick}/>
-                        <img src={Record} alt="Record illustration"  name="Record" onClick={handleClick}/>
-                        <img src={Watchout} alt="Watchout illustration"  name="Watchout" onClick={handleClick}/>
-                        <img src={WeirdPig} alt="Weird Pig illustration"  name="WeirdPig" onClick={handleClick}/>
-                        <img src={WeirdPriestress} alt="Weird Priestress illustration"  name="WeirdPriestress" onClick={handleClick}/>
-                        <img src={Weirddog} alt="Weird dog illustration"  name="Weirddog" onClick={handleClick}/>
-                        <img src={Wathever} alt="Whatever illustration"  name="Wathever" onClick={handleClick}/>
-                   </Thumbnails>
-                </ImgContainer>
-            </SectionContainer>
-        </RightSection>
+            <LeftSection>
+                <SectionContainer>
+                    <h1>Your Profile, Mr.Wasabis</h1>
+                    <Parag>Don't Forget to click the save button before you are gone</Parag>
+
+                    <form>
+                        <NameInput>
+                            <input type="text" name="firstName" placeholder="Steve" />
+                            <input type="text" name="lastName" placeholder="Steveson" />
+                        </NameInput>
+                        <input type="email" name="email" placeholder="me@gmail.com" />
+                        <input type="password" name="password" placeholder="01234" />
+                        <Button>Save</Button>
+                    </form>
+                </SectionContainer>
+            </LeftSection>
+            <RightSection>
+                <SectionContainer>
+                    <h1>You can update your supa kewl profile pic</h1>
+                    <Parag>Omg. These are so cool. Tenk u Gabriel Hollington</Parag>
+                    <ImgContainer>
+                        <SelectedPic>
+                            <img src={picture} alt="ghost ilustration" className="selected-pic" />
+                        </SelectedPic>
+                        <Thumbnails>
+                            <img src={Ghost} alt="ghost ilustration" className="selected-pic" name="Ghost" onClick={handleClick} />
+                            <img src={Johnlenon} alt="John Lennon illustration" name="Johnlenon" onClick={handleClick} />
+                            <img src={Melbourne} alt="Melbourne illustration" name="Melbourne" onClick={handleClick} />
+                            <img src={Record} alt="Record illustration" name="Record" onClick={handleClick} />
+                            <img src={Watchout} alt="Watchout illustration" name="Watchout" onClick={handleClick} />
+                            <img src={WeirdPig} alt="Weird Pig illustration" name="WeirdPig" onClick={handleClick} />
+                            <img src={WeirdPriestress} alt="Weird Priestress illustration" name="WeirdPriestress" onClick={handleClick} />
+                            <img src={Weirddog} alt="Weird dog illustration" name="Weirddog" onClick={handleClick} />
+                            <img src={Wathever} alt="Whatever illustration" name="Wathever" onClick={handleClick} />
+                        </Thumbnails>
+                    </ImgContainer>
+                </SectionContainer>
+            </RightSection>
         </Main>
     )
 }

@@ -1,5 +1,5 @@
 import {ACTION} from './types';
 
-export const loginUser = (user) => {
-    return {type: ACTION.LOGIN, payload: user}
+export const loginUser = () => {
+    return {type: ACTION.LOGIN}
 }

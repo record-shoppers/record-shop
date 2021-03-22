@@ -1,6 +1,6 @@
 import { ACTION } from '../actions/types';
 
-const initialState = '';
+const initialState = {};
 
 export const recordReducer = (state = initialState, action) => {
     switch(action.type) {
