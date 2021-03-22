@@ -1,34 +1,22 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import Johnlenon from "../assets/John+Lennon.jpg";
-import Ghost from "../assets/Ghost.JPG";
-import Melbourne from "../assets/Melbourne.JPG";
-import Watchout from "../assets/watchout.jpg";
-import Weirddog from "../assets/weirddog.jpg";
-import WeirdPig from "../assets/weirdpig.jpg";
-import WeirdPriestress from "../assets/weirdpriestess.jpg";
-import Wathever from "../assets/Whatever.jpg";
-import Record from "../assets/recordjpg.jpg";
-import { saveProfile } from "../actions/profileActions";
+import styled from 'styled-components';
+import Johnlenon from '../assets/John+Lennon.jpg';
+import Ghost from '../assets/Ghost.JPG';
+import Melbourne from '../assets/Melbourne.JPG';
+import Watchout from '../assets/watchout.jpg';
+import Weirddog from '../assets/weirddog.jpg';
+import WeirdPig from '../assets/weirdpig.jpg';
+import WeirdPriestress from '../assets/weirdpriestess.jpg';
+import Wathever from '../assets/Whatever.jpg';
+import Record from '../assets/recordjpg.jpg';
+import { saveProfile } from '../actions/profileActions';
 import { updateAvatar, updateInformation } from "../fetch/fetch";
+import { SectionContainer, LeftSection, ImgContainer, Main} from '../css/LayoutStyles';
+import { Button,NameInput } from '../css/FormStyles';
 
-export const UserProfile = () => {
-  const Main = styled.main`
-    display: flex;
-    height: 100%;
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
-  `;
 
-  const LeftSection = styled.div`
-    width: 100%;
-    @media (max-width: 768px) {
-      margin-bottom: 30px;
-    }
-  `;
 
   const RightSection = styled.div`
     background-color: #f1efff;
@@ -36,50 +24,17 @@ export const UserProfile = () => {
     width: 100%;
   `;
 
-  const SectionContainer = styled.div`
-    margin: 10% auto;
+  
 
-    width: 75%;
-  `;
-
-  const Parag = styled.p`
-    margin-top: 5%;
-  `;
-
-  const NameInput = styled.div`
-    display: flex;
-    input {
-      width: 48%;
-      margin-right: 10px;
-    }
-  `;
-
-  const Button = styled.button`
-    float: right;
-    font-size: 20px;
-  `;
-
-  const ImgContainer = styled.div`
-    margin-top: 10%;
-    display: flex;
-    img {
-      margin: 10px;
-      border-radius: 50%;
-      border: 2px solid #eea668;
-    }
-    @media (max-width: 920px) {
-      flex-direction: column;
-    }
-  `;
-
-  const SelectedPic = styled.div`
+const SelectedPic = styled.div`
     img {
       width: 220px;
       height: 220px;
     }
   `;
 
-  const Thumbnails = styled.div`
+ const Thumbnails = styled.div`
+
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -89,11 +44,13 @@ export const UserProfile = () => {
     }
   `;
 
-  const history = useHistory();
+export const UserProfile = () => {
+  
+   const history = useHistory();
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
   const user = useSelector((state) => state.loginReducer);
-  const [selectedPic, setSelectedPic] = useState("");
+  const [selectedPic, setSelectedPic] = useState('');
   const [userInformation, setUserInformation] = useState({
     firstName: "",
     lastName: "",
@@ -130,9 +87,10 @@ export const UserProfile = () => {
           <h1>
             Your Profile, {user.user.data.firstName} {user.user.data.lastName}
           </h1>
-          <Parag>
+          <p>
             Don't Forget to click the save button before you are gone
-          </Parag>
+          </p>
+
 
           <form onSubmit={handleSubmit}>
             <NameInput>
@@ -168,7 +126,7 @@ export const UserProfile = () => {
       <RightSection>
         <SectionContainer>
           <h1>You can update your supa kewl profile pic</h1>
-          <Parag>Omg. These are so cool. Tenk u Gabriel Hollington</Parag>
+          <p>Omg. These are so cool. Tenk u Gabriel Hollington</p>
           <ImgContainer>
             <SelectedPic>
               <img

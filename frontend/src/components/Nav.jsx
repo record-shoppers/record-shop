@@ -29,6 +29,7 @@ const LoginSignup = styled.div.attrs((props) => ({
 const Signup = styled.div.attrs((props) => ({
   classname: props.className,
 }))`
+  width:105px;
   background-color: white;
   padding: 10px 20px;
   border-radius: 30px;
@@ -45,9 +46,9 @@ const Nav = () => {
   const user = useSelector((state) => state.loginReducer.user);
   const picture = useSelector((state) => state.profileReducer);
   const history = useHistory();
-  window.localStorage.setItem('access_token', user.token)
+  window.localStorage.setItem('access_token', user.token);
   // window.localStorage.setItem('profile_picture', picture)
-  const token = window.localStorage.getItem('access_token')
+  const token = window.localStorage.getItem('access_token');
   // const profilePicture = window.localStorage.getItem('profile_picture')
   const goToProfile = () => {
     history.push('/userprofile');
@@ -69,6 +70,7 @@ const Nav = () => {
         {user ? (
           <UserAvatar
             src={picture}
+            className='selected-pic'
             alt='Profile Picture'
             onClick={goToProfile}
           />
