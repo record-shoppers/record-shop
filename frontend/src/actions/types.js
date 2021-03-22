@@ -1,5 +1,5 @@
 export const ACTION = {
-    CREATE_USER: "create-user",
+    SHOW: "show",
     LOGIN: "login",
     SAVE_PROFILE: "save-profile"
 }
