@@ -13,17 +13,17 @@ export const Login = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log(data );
-    let user = GetUser(data);
-    if (user) {
-     return (dispatch(loginUser()), history.push('/dashboard'))
-    }
+  const onSubmit = async (data) => {
+    console.log('submit');
+    let user = await GetUser(data);
+    console.log(user);
+    dispatch(loginUser(user));
+    if (user) history.push('/dashboard');
   };
 
   return (
     <Layout>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
         <h1>Welcome back!!</h1>
         <p>Please fill in your credentials.</p>
         <Input
@@ -43,6 +43,9 @@ export const Login = () => {
         />
         {errors.password && errors.password.type === 'required' && (
           <span>This is required</span>
+        )}
+        {errors.password && errors.password.type === 'minLength' && (
+          <span>Please provide min 6 charactors</span>
         )}
         <Button type='submit'>Log in</Button>
         <p>
