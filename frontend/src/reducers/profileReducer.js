@@ -1,6 +1,7 @@
 import { ACTION } from '../actions/types';
+import Johnlenon from "../assets/John+Lennon.jpg"
 
-const initialState = '';
+const initialState = Johnlenon;
 
 export const profileReducer = (state = initialState, action) => {
     switch(action.type) {

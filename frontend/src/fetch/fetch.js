@@ -15,6 +15,7 @@ export const GetRecord = async () => {
 export const GetUser = async (data) => {
     try {
         const res = await axios.post(`${URI}/login`, data);
+        console.log(res);
         return res.data
     } catch (err) {
         console.log(err);
