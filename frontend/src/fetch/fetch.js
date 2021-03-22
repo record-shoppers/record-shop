@@ -12,18 +12,19 @@ export const GetRecord = async () => {
 };
 
 export const GetUser = async (data) => {
-    try {
-        const res = await axios.post(`${URI}/login`, data);
-        console.log(res.data);
-        return res
-    } catch (err) {
-        console.log(err);
-    }
-}
+  try {
+    const res = await axios.post(`${URI}/login`, data);
+    console.log("get user res =>", res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const addUser = async (formData) => {
   try {
     const newUser = await axios.post(`${URI}/users`, formData);
+    console.log("new user res =>", newUser);
     return newUser;
   } catch (err) {
     console.log(err.response.data);
@@ -45,6 +46,7 @@ export const updateInformation = async (id, information) => {
       `${URI}/users/${id}`,
       information
     );
+    console.log("get user res =>", informationUpdated);
     return informationUpdated;
   } catch (err) {
     console.log(err.response.data);

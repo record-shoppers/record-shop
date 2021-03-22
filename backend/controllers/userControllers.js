@@ -23,7 +23,7 @@ exports.addUser = async (req, res, next) => {
   const info = req.body;
   try {
     const user = await User.create(info);
-    res.json(user);
+    res.json({ user });
   } catch (err) {
     next(err);
   }
@@ -44,7 +44,7 @@ exports.updateUserAvatar = async (req, res, next) => {
       },
       { new: true }
     );
-    res.json(updatedUser);
+    res.json({ user: updatedUser });
     return;
   } catch (err) {
     next(err);
@@ -69,7 +69,7 @@ exports.updateUserInformation = async (req, res, next) => {
       },
       { new: true }
     );
-    res.json(updatedUser);
+    res.json({ user: updatedUser });
   } catch (err) {
     next(err);
   }

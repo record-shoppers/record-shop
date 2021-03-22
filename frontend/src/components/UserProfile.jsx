@@ -49,7 +49,8 @@ export const UserProfile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
-  const user = useSelector((state) => state.loginReducer.user);
+  const user = useSelector((state) => state.loginReducer.user.user);
+  const [error, setError] = useState("");
   const [selectedPic, setSelectedPic] = useState("");
   const [userInformation, setUserInformation] = useState({
     firstName: "",
@@ -70,15 +71,24 @@ export const UserProfile = () => {
   };
 
   const handleSubmit = async (e) => {
+    setError("");
     e.preventDefault();
-    if (userInformation.firstName && userInformation.lastName) {
-      let updatedInformation = await updateInformation(
-        user._id,
-        userInformation
-      );
-      console.log(updatedInformation.data);
-      dispatch(loginUser(updatedInformation.data));
+    if (!userInformation.firstName || !userInformation.lastName) {
+      setError("Use must enter and first and last name to update!");
+      return;
     }
+
+    if (
+      userInformation.email !== user.email ||
+      userInformation.password !== user.password
+    ) {
+      setError("You must enter the correct Email and Password!");
+      return;
+    }
+
+    let updatedInformation = await updateInformation(user._id, userInformation);
+    console.log(updatedInformation);
+    dispatch(loginUser(updatedInformation.data));
   };
 
   return (
@@ -91,6 +101,7 @@ export const UserProfile = () => {
           <p>Don't Forget to click the save button before you are gone</p>
 
           <form onSubmit={handleSubmit}>
+            {error && <h1>{error}</h1>}
             <NameInput>
               <input
                 type="text"
@@ -110,14 +121,14 @@ export const UserProfile = () => {
             <input
               type="email"
               name="email"
-              placeholder={user && user.email}
+              placeholder="Email"
               onChange={changeHanler}
               value={userInformation.email}
             />
             <input
               type="password"
               name="password"
-              placeholder={user && user.password}
+              placeholder="Password"
               onChange={changeHanler}
               value={userInformation.password}
             />
