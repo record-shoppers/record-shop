@@ -1,10 +1,10 @@
 import { ACTION } from '../actions/types';
-import Johnlenon from "../assets/John+Lennon.jpg"
+const profilePicture = window.localStorage.getItem('profile_picture')
 
-const initialState = Johnlenon;
+const initialState = profilePicture;
 
 export const profileReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ACTION.SAVE_PROFILE:
             return state = action.payload
         default:

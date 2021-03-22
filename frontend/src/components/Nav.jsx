@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
-
 const NavUl = styled.ul`
   background-color: #f2f2f2;
   height: 90px;
@@ -20,14 +19,12 @@ const NavLi = styled.li`
   margin: 10px;
 `;
 
-
 const LoginSignup = styled.div.attrs((props) => ({
   classname: props.className,
 }))`
   display: flex;
   align-items: center;
 `;
-
 
 const Signup = styled.div.attrs((props) => ({
   classname: props.className,
@@ -42,16 +39,16 @@ const UserAvatar = styled.img`
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: tomato;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Nav = () => {
-  const user = useSelector((state) => state.loginReducer);
+  const user = useSelector((state) => state.loginReducer.user);
   const picture = useSelector((state) => state.profileReducer);
   const history = useHistory();
+  window.localStorage.setItem('access_token', user.token)
+  // window.localStorage.setItem('profile_picture', picture)
+  const token = window.localStorage.getItem('access_token')
+  // const profilePicture = window.localStorage.getItem('profile_picture')
   const goToProfile = () => {
     history.push('/userprofile');
   };
@@ -59,7 +56,7 @@ const Nav = () => {
   return (
     <nav>
       <NavUl>
-        {user ? (
+        {token ? (
           <NavLi>
             <Link to='/dashboard'>RECORD STORE</Link>
           </NavLi>
@@ -70,7 +67,11 @@ const Nav = () => {
         )}
 
         {user ? (
-          <UserAvatar src={picture} alt="Profile Picture" onClick={goToProfile}/>
+          <UserAvatar
+            src={picture}
+            alt='Profile Picture'
+            onClick={goToProfile}
+          />
         ) : (
           <LoginSignup>
             <NavLi>
