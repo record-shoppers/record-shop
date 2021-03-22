@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Johnlenon from '../assets/John+Lennon.jpg';
@@ -10,23 +11,23 @@ import WeirdPriestress from '../assets/weirdpriestess.jpg';
 import Wathever from '../assets/Whatever.jpg';
 import Record from '../assets/recordjpg.jpg';
 import { saveProfile } from '../actions/profileActions';
+import { updateAvatar, updateInformation } from "../fetch/fetch";
 import { SectionContainer, LeftSection, ImgContainer, Main} from '../css/LayoutStyles';
-import {Button,NameInput} from '../css/FormStyles';
+import { Button,NameInput } from '../css/FormStyles';
 
-export const UserProfile = () => {
-  const RightSection = styled.div`
+const RightSection = styled.div`
     width: 100%;
     background-color: #f1efff;
   `;
 
-  const SelectedPic = styled.div`
+const SelectedPic = styled.div`
     img {
       width: 220px;
       height: 220px;
     }
   `;
 
-  const Thumbnails = styled.div`
+ const Thumbnails = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -35,15 +36,25 @@ export const UserProfile = () => {
       height: 60px;
     }
   `;
+
+export const UserProfile = () => {
+  
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
+  const user = useSelector((state) => state.loginReducer);
+  const [selectedPic, setSelectedPic] = useState('');
 
-  let selectedPic = '';
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
+    console.log("this is the user =>", user);
     const pic = e.target.src;
+    let isUpdated = await updateAvatar(user._id, pic);
+    console.log(isUpdated);
     dispatch(saveProfile(pic));
-    selectedPic = e.target.name;
-    console.log(e.target.name);
+     setSelectedPic(e.target.name);
+  };
+
+  const handleSubmit = (e) => {
+    console.log(e);
   };
 
   return (
@@ -53,14 +64,15 @@ export const UserProfile = () => {
           <h1>Your Profile, Mr.Wasabis</h1>
           <p>Don't Forget to click the save button before you are gone</p>
           
-          <form>
+          <form onSubmit={handleSubmit}>
             <NameInput>
-              <input type='text' name='firstName' placeholder='Steve' />
-              <input type='text' name='lastName' placeholder='Steveson' />
+              <input type="text" name="firstName" placeholder="Steve" />
+              <input type="text" name="lastName" placeholder="Steveson" />
             </NameInput>
-            <input type='email' name='email' placeholder='me@gmail.com' />
-            <input type='password' name='password' placeholder='01234' />
-            <Button>Save</Button>
+            <input type="email" name="email" placeholder="me@gmail.com" />
+            <input type="password" name="password" placeholder="01234" />
+            <Button type="submit">Save</Button>
+
           </form>
         </SectionContainer>
       </LeftSection>
@@ -72,13 +84,16 @@ export const UserProfile = () => {
             <SelectedPic>
               <img
                 src={picture}
+
                 alt='ghost ilustration'
                 className='selected-pic'
+
               />
             </SelectedPic>
             <Thumbnails>
               <img
                 src={Ghost}
+
                 alt='ghost ilustration'
                 name='Ghost'
                 className={selectedPic === 'Ghost' ? 'active' : 'selected-pic'}
@@ -86,27 +101,34 @@ export const UserProfile = () => {
               />
               <img
                 src={Johnlenon}
+
                 alt='John Lennon illustration'
                 name='Johnlenon'
                 className={
                   selectedPic === 'Johnlenon' ? 'active' : 'selected-pic'
                 }
+
                 onClick={handleClick}
               />
               <img
                 src={Melbourne}
+
+
                 alt='Melbourne illustration'
                 name='Melbourne'
                 className={
                   selectedPic === 'Melbourne' ? 'active' : 'selected-pic'
                 }
+
                 onClick={handleClick}
               />
               <img
                 src={Record}
+
                 alt='Record illustration'
                 name='Record'
                 className={selectedPic === 'Record' ? 'active' : 'selected-pic'}
+
                 onClick={handleClick}
               />
               <img
@@ -116,37 +138,45 @@ export const UserProfile = () => {
                 className={
                   selectedPic === 'Watchout' ? 'active' : 'selected-pic'
                 }
+
                 onClick={handleClick}
               />
               <img
                 src={WeirdPig}
+
                 alt='Weird Pig illustration'
                 name='WeirdPig'
                 className={
                   selectedPic === 'WeirdPig' ? 'active' : 'selected-pic'
                 }
+
                 onClick={handleClick}
               />
               <img
                 src={WeirdPriestress}
+
                 alt='Weird Priestress illustration'
                 name='WeirdPriestress'
                 className={
                   selectedPic === 'WeirdPriestress' ? 'active' : 'selected-pic'
                 }
+
                 onClick={handleClick}
               />
               <img
                 src={Weirddog}
+
                 alt='Weird dog illustration'
                 name='Weirddog'
                 className={
                   selectedPic === 'Weirddog' ? 'active' : 'selected-pic'
                 }
+
                 onClick={handleClick}
               />
               <img
                 src={Wathever}
+
                 alt='Whatever illustration'
                 name='Wathever'
                 className={

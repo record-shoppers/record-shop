@@ -1,21 +1,23 @@
-import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { addUser } from '../fetch/fetch';
-import randomMan from '../assets/singup-img/randomMan.png';
-import { SectionContainer, LeftSection, RightSection, ImgContainer, Main} from '../css/LayoutStyles';
-import {Button,NameInput} from '../css/FormStyles';
+
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { addUser } from "../fetch/fetch";
+import randomMan from "../assets/singup-img/randomMan.png";
+import { Layout } from "../css/LayoutStyles";
+import { SectionContainer, LeftSection, RightSection, ImgContainer, Main } from '../css/LayoutStyles';
+import { Button,NameInput } from '../css/FormStyles';
 import { useState } from 'react';
 
 export const SignUp = () => {
   let history = useHistory();
   const { register, handleSubmit, reset, errors } = useForm();
 
-  const [matchingPassword, setMatchingPassword] = useState('');
+  const [matchingPassword, setMatchingPassword] = useState("");
 
   const onSubmit = async (formData) => {
     if (formData.password === formData.confirmPassword) {
       const newUser = await addUser(formData);
-      if (newUser) history.push('/userprofile');
+      if (newUser) history.push("/userprofile");
       reset();
     } else {
       setMatchingPassword(false);
