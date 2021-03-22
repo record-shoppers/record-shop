@@ -3,14 +3,15 @@ const User = require("../models/User");
 const Record = require("../models/Record");
 const faker = require("faker");
 
-(async function () {
-  const strConn = `mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/recordstoredb?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`;
-  mongoose.connect(strConn, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  });
+
+(async function (){
+    const strConn =`mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
+    mongoose.connect(strConn, {
+        useNewUrlParser:true,
+        useUnifiedTopology:true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+    })
 
   mongoose.connection.on("error", () =>
     console.log("Cannot connect to the DB")

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { GetRecord } from '../fetch/fetch';
 import { useDispatch } from 'react-redux';
@@ -37,6 +38,9 @@ const GridImage = styled.img`
 const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
+  const user = useSelector((state)=> state.loginReducer);
+  console.log(user.loggedin);
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -57,10 +61,12 @@ const Dashboard = () => {
     }
   }, []);
 
+  if(!user.loggedin) history.push("/")
   return (
     <FlexWrap>
       <Title>Dashboard</Title>
-      <p>Here you can find all our records.</p>
+      <p>Hello, {user.user.data.nickname}. Here you can find all our records.</p>
+
       {error && <h1>{error}</h1>}
       {loading ? (
         <h1>Loading...</h1>

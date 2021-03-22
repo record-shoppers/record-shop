@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Johnlenon from "../assets/John+Lennon.jpg";
@@ -16,20 +17,32 @@ export const UserProfile = () => {
   const Main = styled.main`
     display: flex;
     height: 100%;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   `;
 
   const LeftSection = styled.div`
-    width: 50%;
+    width: 100%;
+    @media (max-width: 768px) {
+      margin-bottom: 30px;
+    }
+
   `;
 
   const RightSection = styled.div`
     background-color: #f1efff;
-    width: 50%;
+
+    width: 100%;
+
   `;
 
   const SectionContainer = styled.div`
     margin: 10% auto;
-    width: 70%;
+
+
+    width: 75%;
+
   `;
 
   const Parag = styled.p`
@@ -54,36 +67,52 @@ export const UserProfile = () => {
     display: flex;
     img {
       margin: 10px;
-      border-radius: 50%;
-      border: 2px solid #eea668;
     }
   `;
 
-  const SelectedPic = styled.div`
-    width: 50%;
+  const Button = styled.button`
+    float: right;
+    font-size: 20px;
+  `;
+
+  const ImgContainer = styled.div`
+    margin-top: 10%;
+    display: flex;
     img {
-      width: 270px;
-      height: 270px;
+      margin: 10px;
+      border-radius: 50%;
+      border: 2px solid #eea668;
+    }
+     @media (max-width: 920px) {
+      flex-direction: column;
+    }
+  `;
+
+
+   
+
+  const SelectedPic = styled.div`
+    img {
+      width: 220px;
+      height: 220px;
     }
   `;
 
   const Thumbnails = styled.div`
-    width: 50%;
-    grid-template-rows: repeat(3, 1fr);
+ display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    button {
-      padding: 0;
-    }
     img {
-      width: 75px;
-      height: 75px;
+      width: 60px;
+      height: 60px;
     }
   `;
+
 
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
   const user = useSelector((state) => state.loginReducer);
+    const [selectedPic, setSelectedPic] = useState('');
 
   const handleClick = async (e) => {
     console.log("this is the user =>", user);
@@ -91,6 +120,7 @@ export const UserProfile = () => {
     let isUpdated = await updateAvatar(user._id, pic);
     console.log(isUpdated);
     dispatch(saveProfile(pic));
+     setSelectedPic(e.target.name);
   };
 
   const handleSubmit = (e) => {
@@ -114,6 +144,7 @@ export const UserProfile = () => {
             <input type="email" name="email" placeholder="me@gmail.com" />
             <input type="password" name="password" placeholder="01234" />
             <Button type="submit">Save</Button>
+
           </form>
         </SectionContainer>
       </LeftSection>
@@ -125,64 +156,104 @@ export const UserProfile = () => {
             <SelectedPic>
               <img
                 src={picture}
-                alt="ghost ilustration"
-                className="selected-pic"
+
+                alt='ghost ilustration'
+                className='selected-pic'
+
               />
             </SelectedPic>
             <Thumbnails>
               <img
                 src={Ghost}
-                alt="ghost ilustration"
-                className="selected-pic"
-                name="Ghost"
+
+                alt='ghost ilustration'
+                name='Ghost'
+                className={selectedPic === 'Ghost' ? 'active' : 'selected-pic'}
                 onClick={handleClick}
               />
               <img
                 src={Johnlenon}
-                alt="John Lennon illustration"
-                name="Johnlenon"
+
+                alt='John Lennon illustration'
+                name='Johnlenon'
+                className={
+                  selectedPic === 'Johnlenon' ? 'active' : 'selected-pic'
+                }
+
                 onClick={handleClick}
               />
               <img
                 src={Melbourne}
-                alt="Melbourne illustration"
-                name="Melbourne"
+
+
+                alt='Melbourne illustration'
+                name='Melbourne'
+                className={
+                  selectedPic === 'Melbourne' ? 'active' : 'selected-pic'
+                }
+
                 onClick={handleClick}
               />
               <img
                 src={Record}
-                alt="Record illustration"
-                name="Record"
+
+                alt='Record illustration'
+                name='Record'
+                className={selectedPic === 'Record' ? 'active' : 'selected-pic'}
+
                 onClick={handleClick}
               />
               <img
                 src={Watchout}
-                alt="Watchout illustration"
-                name="Watchout"
+                alt='Watchout illustration'
+                name='Watchout'
+                className={
+                  selectedPic === 'Watchout' ? 'active' : 'selected-pic'
+                }
+
                 onClick={handleClick}
               />
               <img
                 src={WeirdPig}
-                alt="Weird Pig illustration"
-                name="WeirdPig"
+
+                alt='Weird Pig illustration'
+                name='WeirdPig'
+                className={
+                  selectedPic === 'WeirdPig' ? 'active' : 'selected-pic'
+                }
+
                 onClick={handleClick}
               />
               <img
                 src={WeirdPriestress}
-                alt="Weird Priestress illustration"
-                name="WeirdPriestress"
+
+                alt='Weird Priestress illustration'
+                name='WeirdPriestress'
+                className={
+                  selectedPic === 'WeirdPriestress' ? 'active' : 'selected-pic'
+                }
+
                 onClick={handleClick}
               />
               <img
                 src={Weirddog}
-                alt="Weird dog illustration"
-                name="Weirddog"
+
+                alt='Weird dog illustration'
+                name='Weirddog'
+                className={
+                  selectedPic === 'Weirddog' ? 'active' : 'selected-pic'
+                }
+
                 onClick={handleClick}
               />
               <img
                 src={Wathever}
-                alt="Whatever illustration"
-                name="Wathever"
+
+                alt='Whatever illustration'
+                name='Wathever'
+                className={
+                  selectedPic === 'Wathever' ? 'active' : 'selected-pic'
+                }
                 onClick={handleClick}
               />
             </Thumbnails>

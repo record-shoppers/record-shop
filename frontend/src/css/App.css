@@ -43,3 +43,13 @@ img {
   width: 100%;
   height: 100%;
 }
+
+.active {
+  border-radius: 50%;
+  border: 4px solid blue;
+}
+
+.selected-pic {
+  border-radius: 50%;
+  border: 2px solid #eea668;
+}
