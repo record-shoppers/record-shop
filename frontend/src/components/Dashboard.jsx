@@ -65,7 +65,7 @@ const Dashboard = () => {
   return (
     <FlexWrap>
       <Title>Dashboard</Title>
-      <p>Hello, . Here you can find all our records.</p>
+      <p>Hello, {user.user.data.nickname}. Here you can find all our records.</p>
 
       {error && <h1>{error}</h1>}
       {loading ? (
