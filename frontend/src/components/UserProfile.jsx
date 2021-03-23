@@ -49,8 +49,16 @@ export const UserProfile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
+<<<<<<< HEAD
   const user = useSelector((state) => state.loginReducer.user);
   const [selectedPic, setSelectedPic] = useState("");
+=======
+
+  const user = useSelector((state) => state.loginReducer.user.user);
+  const [error, setError] = useState("");
+  const [selectedPic, setSelectedPic] = useState("");
+
+>>>>>>> ab05a3710f5b9279ba69d16f81b50454ac4e0540
   const [userInformation, setUserInformation] = useState({
     firstName: "",
     lastName: "",
@@ -70,15 +78,24 @@ export const UserProfile = () => {
   };
 
   const handleSubmit = async (e) => {
+    setError("");
     e.preventDefault();
-    if (userInformation.firstName && userInformation.lastName) {
-      let updatedInformation = await updateInformation(
-        user._id,
-        userInformation
-      );
-      console.log(updatedInformation.data);
-      dispatch(loginUser(updatedInformation.data));
+    if (!userInformation.firstName || !userInformation.lastName) {
+      setError("Use must enter and first and last name to update!");
+      return;
     }
+
+    if (
+      userInformation.email !== user.email ||
+      userInformation.password !== user.password
+    ) {
+      setError("You must enter the correct Email and Password!");
+      return;
+    }
+
+    let updatedInformation = await updateInformation(user._id, userInformation);
+    console.log(updatedInformation);
+    dispatch(loginUser(updatedInformation.data));
   };
 
   return (
@@ -91,6 +108,7 @@ export const UserProfile = () => {
           <p>Don't Forget to click the save button before you are gone</p>
 
           <form onSubmit={handleSubmit}>
+            {error && <h1>{error}</h1>}
             <NameInput>
               <input
                 type="text"
@@ -108,16 +126,29 @@ export const UserProfile = () => {
               />
             </NameInput>
             <input
+<<<<<<< HEAD
               type="email"
               name="email"
               placeholder={user && user.email}
+=======
+
+              type="email"
+              name="email"
+              placeholder="Email"
+
+>>>>>>> ab05a3710f5b9279ba69d16f81b50454ac4e0540
               onChange={changeHanler}
               value={userInformation.email}
             />
             <input
               type="password"
               name="password"
+<<<<<<< HEAD
               placeholder={user && user.password}
+=======
+              placeholder="Password"
+
+>>>>>>> ab05a3710f5b9279ba69d16f81b50454ac4e0540
               onChange={changeHanler}
               value={userInformation.password}
             />
