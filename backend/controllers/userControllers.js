@@ -15,7 +15,7 @@ exports.getUser = async (req, res, next) => {
     const user = await User.findById(id);
     res.json(user);
   } catch (err) {
-    next(err);
+      next(err);
   }
 };
 

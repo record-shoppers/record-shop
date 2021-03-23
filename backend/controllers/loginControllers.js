@@ -5,9 +5,14 @@ exports.checkUser = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email, password });
-    if (!user)
-      return res.status(404).json({ message: "The user does not exist!" });
+    if (!user) {
+      let error = new Error(`Entered incorrect email or password!`);
+      error.status = 200;
+      throw error
+
     console.log(user);
+    return
+  }
 
     // if (user.password != req.body.password) return res.status(400).json({ message: "Password is not valid!" })
 
@@ -17,6 +22,6 @@ exports.checkUser = async (req, res, next) => {
 
     res.status(200).json({ user });
   } catch (err) {
-    res.status(500).json({ message: "something went wrong!" });
+    next(err)
   }
 };
