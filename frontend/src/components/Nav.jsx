@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const NavUl = styled.ul`
   background-color: #f2f2f2;
@@ -29,6 +29,7 @@ const LoginSignup = styled.div.attrs((props) => ({
 const Signup = styled.div.attrs((props) => ({
   classname: props.className,
 }))`
+  width: 105px;
   background-color: white;
   padding: 10px 20px;
   border-radius: 30px;
@@ -45,35 +46,43 @@ const Nav = () => {
   const user = useSelector((state) => state.loginReducer.user);
   const picture = useSelector((state) => state.profileReducer);
   const history = useHistory();
-  window.localStorage.setItem('access_token', user.token)
-  const token = window.localStorage.getItem('access_token')
+  //window.localStorage.setItem('access_token', user.token);
+  // window.localStorage.setItem('profile_picture', picture)
+  //const token = window.localStorage.getItem('access_token');
+  // const profilePicture = window.localStorage.getItem('profile_picture')
   const goToProfile = () => {
-    history.push('/userprofile');
+    history.push("/userprofile");
   };
 
   return (
     <nav>
       <NavUl>
-        {token ? (
+        {/* token ? => what is this?  for now changed to user*/}
+        {user ? (
           <NavLi>
-            <Link to='/dashboard'>RECORD STORE</Link>
+            <Link to="/dashboard">RECORD STORE</Link>
           </NavLi>
         ) : (
           <NavLi>
-            <Link to='/'>RECORD STORE</Link>
+            <Link to="/">RECORD STORE</Link>
           </NavLi>
         )}
 
-        {token ? (
-          <UserAvatar src={picture} alt="Profile Picture" onClick={goToProfile}/>
+        {user ? (
+          <UserAvatar
+            src={picture}
+            className="selected-pic"
+            alt="Profile Picture"
+            onClick={goToProfile}
+          />
         ) : (
           <LoginSignup>
             <NavLi>
-              <Link to='login'>Login</Link>
+              <Link to="login">Login</Link>
             </NavLi>
-            <NavLi className='signup'>
+            <NavLi className="signup">
               <Signup>
-                <Link to='signUp'>Sign up</Link>
+                <Link to="signUp">Sign up</Link>
               </Signup>
             </NavLi>
           </LoginSignup>
