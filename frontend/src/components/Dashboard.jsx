@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { GetRecord } from '../fetch/fetch';
 import { useDispatch } from 'react-redux';
@@ -36,7 +35,6 @@ const Dashboard = () => {
   const records = useSelector((state) => state.recordReducer.data);
   const user = useSelector((state) => state.loginReducer.user);
 
-  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -57,7 +55,6 @@ const Dashboard = () => {
     }
   }, []);
 
-  // if (!user.loggedin) history.push("/") 
   return (
     <FlexWrap>
       <h3>Dashboard</h3>
