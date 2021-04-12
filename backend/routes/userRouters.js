@@ -8,6 +8,7 @@ const {
   updateUserAvatar,
 } = require("../controllers/userControllers");
 const { userValidationRules, userValidationErrorHandling } = require("../middleware/validation");
+const { addOrder } = require("../controllers/orderControllers")
 
 userRouters
   .route("/")
@@ -18,5 +19,9 @@ userRouters
   .get(getUser)
   .put(updateUserAvatar)
   .put(updateUserInformation);
+
+userRouters
+  .route("/:id/order")
+  .post(addOrder)
 
 module.exports = userRouters;

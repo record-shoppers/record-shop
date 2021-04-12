@@ -1,26 +1,39 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const bcryptjs = require("bcryptjs")
 
 exports.checkUser = async (req, res, next) => {
   const { email, password } = req.body;
+
   try {
-    const user = await User.findOne({ email, password });
+    const user = await User.findOne({ email });
     if (!user) {
-      let error = new Error(`Entered incorrect email or password!`);
+      let error = new Error(`Entered incorrect email`);
       error.status = 200;
       throw error
+    }
+    
+    const pwCompareResult = bcryptjs.compareSync(password, user.password);
+    if (!pwCompareResult) {
+      let error = new Error('Wrong password');
+      error.status = 401
+      throw error;
+    }
+    
+    console.log("user", user);
+    const token = user.generateAuthToken();
 
-    console.log(user);
-    return
-  }
+    console.log("token",token);
 
-    // if (user.password != req.body.password) return res.status(400).json({ message: "Password is not valid!" })
-
-    const token = jwt.sign({ email: user.email, id: user._id }, "test", {
-      expiresIn: "1h",
-    });
-
-    res.status(200).json({ user });
+    res
+    .cookie('token', token, {
+      expires: new Date(Date.now() + 604800000),
+      sameSite: process.env.NODE_ENV == 'production' ? 'None' : 'lax',
+      secure: process.env.NODE_ENV == 'production' ? true : false, //http on localhost, https on production
+      httpOnly: true,
+    })
+    .json(user);
+    
   } catch (err) {
     next(err)
   }

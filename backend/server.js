@@ -6,6 +6,8 @@ const userRouters = require('./routes/userRouters');
 const recordRouters = require('./routes/recordRouters');
 const loginRouters = require('./routes/loginRouters');
 const PORT = 5001;
+require("dotenv").config()
+
 
 //MIDDLEWARE
 app.use(express.json());
