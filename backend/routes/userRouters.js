@@ -7,12 +7,12 @@ const {
   updateUserInformation,
   updateUserAvatar,
 } = require("../controllers/userControllers");
-const { validateUser, validatePassword } = require("../middleware/validation");
+const { userValidationRules, userValidationErrorHandling } = require("../middleware/validation");
 
 userRouters
   .route("/")
   .get(getUsers)
-  .post(validateUser, validatePassword, addUser);
+  .post(userValidationRules(), userValidationErrorHandling, addUser);
 userRouters
   .route("/:id")
   .get(getUser)
