@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../actions/loginAction';
 import { GetUser } from '../fetch/fetch';
 import login from '../assets/login.png';
+import { useState } from 'react';
 
 
 export const Login = () => {
@@ -14,10 +15,16 @@ export const Login = () => {
 
   const dispatch = useDispatch();
 
+  const [error,setError] = useState(false)
+
   const onSubmit = async (data) => {
     let user = await GetUser(data);
-    dispatch(loginUser(user.data));
-    if (user) history.push('/dashboard');
+    
+    if (user){
+      history.push('/dashboard')
+      dispatch(loginUser(user.data));
+    }
+    
   };
 
   return (
