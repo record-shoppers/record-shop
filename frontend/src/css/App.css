@@ -45,7 +45,7 @@ img {
 }
 
 p {
-	margin-top: 5%;
+	margin-top: 10px;
 }
 
 form {
@@ -61,4 +61,9 @@ form {
 .selected-pic {
 	border-radius: 50%;
 	border: 2px solid #eea668;
+}
+
+span {
+	color: red;
+	font-weight: 500;
 }

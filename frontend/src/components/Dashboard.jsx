@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { GetRecord } from '../fetch/fetch';
 import { useDispatch } from 'react-redux';
@@ -13,17 +12,13 @@ const FlexWrap = styled.div`
   margin: 10px;
 `;
 
-const Title = styled.h3`
-  margin-bottom: 10px;
-`;
-
 const Grid = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: repeat(4, auto);
   grid-gap: 4rem;
   justify-content: center;
-  padding-top: 5rem;
+  padding-top: 4rem;
 `;
 
 const GridItems = styled.div`
@@ -38,9 +33,8 @@ const GridImage = styled.img`
 const Dashboard = () => {
   const dispatch = useDispatch();
   const records = useSelector((state) => state.recordReducer.data);
-  const user = useSelector((state)=> state.loginReducer);
-  
-  const history = useHistory();
+  const user = useSelector((state) => state.loginReducer.user);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -61,11 +55,10 @@ const Dashboard = () => {
     }
   }, []);
 
-  if(!user.loggedin) history.push("/")
   return (
     <FlexWrap>
-      <Title>Dashboard</Title>
-      <p>Hello, {user.user.data.nickname}. Here you can find all our records.</p>
+      <h3>Dashboard</h3>
+      <p>Hello, {user.user.nickname}. Here you can find all our records.</p>
 
       {error && <h1>{error}</h1>}
       {loading ? (
