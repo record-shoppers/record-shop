@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { GetRecord } from '../fetch/fetch';
-import { useDispatch } from 'react-redux';
-import { show } from '../actions/recordActions';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import { GetRecord } from "../helpers/fetch";
+import { useDispatch } from "react-redux";
+import { show } from "../actions/recordActions";
 
 const FlexWrap = styled.div`
   display: flex;
@@ -36,11 +36,11 @@ const Dashboard = () => {
   const user = useSelector((state) => state.loginReducer.user);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const getData = async () => {
         let res = await GetRecord();
@@ -69,7 +69,7 @@ const Dashboard = () => {
             records.map((record) => {
               return (
                 <GridItems key={record._id}>
-                  <GridImage src={record.cover} alt='Record-Cover' />
+                  <GridImage src={record.cover} alt="Record-Cover" />
                 </GridItems>
               );
             })}

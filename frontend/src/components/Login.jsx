@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../actions/loginAction';
-import { GetUser } from '../fetch/fetch';
+import { GetUser } from '../helpers/fetch';
 import login from '../assets/login.png';
+import { setUserInStorage } from "../helpers/localStorage";
 
 
 export const Login = () => {
@@ -24,7 +25,8 @@ export const Login = () => {
       let user = await GetUser(data);
       console.log(user);
       if (!user.error) {
-      dispatch(loginUser(user));
+        dispatch(loginUser(user));
+        setUserInStorage(user);
       history.push('/dashboard');
     } else {
       setErrorState(user.error.message)
