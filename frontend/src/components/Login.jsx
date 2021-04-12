@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../actions/loginAction';
 import { GetUser } from '../fetch/fetch';
 import login from '../assets/login.png';
-import { useState } from 'react';
 
 
 export const Login = () => {
