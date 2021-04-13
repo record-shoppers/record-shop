@@ -2,10 +2,11 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { MdShoppingCart } from "react-icons/md";
 
 const NavUl = styled.ul`
   background-color: #f2f2f2;
-  height: 90px;
+  height: 60px;
   width: 100%;
   display: flex;
   list-style: none;
@@ -35,21 +36,44 @@ const Signup = styled.div.attrs((props) => ({
   border-radius: 30px;
 `;
 
+const UserSelection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 80px;
+`;
+
 const UserAvatar = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
+`;
+
+const ShoppingCart = styled.div`
+  position: relative;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ItemQuantity = styled.div`
+  position: absolute;
+  top: -5px;
+  right: -2px;
+  background-color: orange;
+  color: white;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
 `;
 
 const Nav = () => {
   const user = useSelector((state) => state.loginReducer.user);
   const picture = useSelector((state) => state.profileReducer);
   const history = useHistory();
-  //window.localStorage.setItem('access_token', user.token);
-  // window.localStorage.setItem('profile_picture', picture)
-  //const token = window.localStorage.getItem('access_token');
-  // const profilePicture = window.localStorage.getItem('profile_picture')
+
   const goToProfile = () => {
     history.push("/userprofile");
   };
@@ -57,7 +81,6 @@ const Nav = () => {
   return (
     <nav>
       <NavUl>
-        {/* token ? => what is this?  for now changed to user*/}
         {user ? (
           <NavLi>
             <Link to="/dashboard">RECORD STORE</Link>
@@ -69,12 +92,18 @@ const Nav = () => {
         )}
 
         {user ? (
-          <UserAvatar
-            src={picture}
-            className="selected-pic"
-            alt="Profile Picture"
-            onClick={goToProfile}
-          />
+          <UserSelection>
+            <ShoppingCart>
+              <MdShoppingCart />
+              <ItemQuantity>{}</ItemQuantity>
+            </ShoppingCart>
+            <UserAvatar
+              src={picture}
+              className="selected-pic"
+              alt="Profile Picture"
+              onClick={goToProfile}
+            />
+          </UserSelection>
         ) : (
           <LoginSignup>
             <NavLi>

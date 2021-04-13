@@ -23,11 +23,27 @@ const Grid = styled.div`
 
 const GridItems = styled.div`
   box-shadow: 1px 1px 2px 1px #727272;
+  position: relative;
 `;
 
 const GridImage = styled.img`
   width: 100%;
   height: 100%;
+`;
+
+const Button = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  color: white;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 900;
 `;
 
 const Dashboard = () => {
@@ -70,6 +86,7 @@ const Dashboard = () => {
               return (
                 <GridItems key={record._id}>
                   <GridImage src={record.cover} alt="Record-Cover" />
+                  <Button>+</Button>
                 </GridItems>
               );
             })}
