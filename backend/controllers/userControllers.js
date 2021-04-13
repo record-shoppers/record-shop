@@ -15,7 +15,7 @@ exports.getUser = async (req, res, next) => {
     const user = await User.findById(id);
     res.json(user);
   } catch (err) {
-      next(err);
+    next(err);
   }
 };
 
@@ -73,4 +73,9 @@ exports.updateUserInformation = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+exports.authUser = (req, res) => {
+  //req.user
+  res.json(req.user);
 };
