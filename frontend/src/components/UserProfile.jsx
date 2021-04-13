@@ -49,16 +49,11 @@ export const UserProfile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
-<<<<<<< HEAD
-  const user = useSelector((state) => state.loginReducer.user);
-  const [selectedPic, setSelectedPic] = useState("");
-=======
 
   const user = useSelector((state) => state.loginReducer.user.user);
   const [error, setError] = useState("");
   const [selectedPic, setSelectedPic] = useState("");
 
->>>>>>> ab05a3710f5b9279ba69d16f81b50454ac4e0540
   const [userInformation, setUserInformation] = useState({
     firstName: "",
     lastName: "",
@@ -126,29 +121,16 @@ export const UserProfile = () => {
               />
             </NameInput>
             <input
-<<<<<<< HEAD
-              type="email"
-              name="email"
-              placeholder={user && user.email}
-=======
-
               type="email"
               name="email"
               placeholder="Email"
-
->>>>>>> ab05a3710f5b9279ba69d16f81b50454ac4e0540
               onChange={changeHanler}
               value={userInformation.email}
             />
             <input
               type="password"
               name="password"
-<<<<<<< HEAD
-              placeholder={user && user.password}
-=======
               placeholder="Password"
-
->>>>>>> ab05a3710f5b9279ba69d16f81b50454ac4e0540
               onChange={changeHanler}
               value={userInformation.password}
             />
