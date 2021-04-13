@@ -6,7 +6,7 @@ const initialState = profilePicture;
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTION.SAVE_PROFILE:
-            return state = action.payload
+            return action.payload
         default:
             return state
     }

@@ -45,7 +45,7 @@ const faker = require("faker");
         lastName: faker.name.lastName(),
         nickname: faker.internet.userName(),
         email: faker.internet.email(),
-        password: "01234Ab",
+        password: "01234Ab#",
         avatar: "http://localhost:5001/statics/John+Lennon.jpg",
       };
       const user = new User(userData);
@@ -67,6 +67,7 @@ const faker = require("faker");
         title: faker.lorem.words(),
         artist: faker.lorem.word(),
         year: faker.date.past(),
+        price: faker.commerce.price(),
       };
 
       const record = new Record(recordData);

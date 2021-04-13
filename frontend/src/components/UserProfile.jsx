@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Johnlenon from "../assets/John+Lennon.jpg";
 import Ghost from "../assets/Ghost.JPG";
@@ -12,7 +11,7 @@ import WeirdPriestress from "../assets/weirdpriestess.jpg";
 import Wathever from "../assets/Whatever.jpg";
 import Record from "../assets/recordjpg.jpg";
 import { saveProfile } from "../actions/profileActions";
-import { updateAvatar, updateInformation } from "../fetch/fetch";
+import { updateInformation } from "../helpers/fetch";
 import {
   SectionContainer,
   LeftSection,
@@ -46,7 +45,6 @@ const Thumbnails = styled.div`
 `;
 
 export const UserProfile = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const picture = useSelector((state) => state.profileReducer);
 
@@ -67,7 +65,6 @@ export const UserProfile = () => {
 
   const handleClick = async (e) => {
     const pic = e.target.src;
-    let updatedAvatar = await updateAvatar(user._id, pic);
     dispatch(saveProfile(pic));
     setSelectedPic(e.target.name);
   };
@@ -103,7 +100,7 @@ export const UserProfile = () => {
           <p>Don't Forget to click the save button before you are gone</p>
 
           <form onSubmit={handleSubmit}>
-            {error && <h1>{error}</h1>}
+            {error && <span>{error}</span>}
             <NameInput>
               <input
                 type="text"

@@ -7,16 +7,21 @@ const {
   updateUserInformation,
   updateUserAvatar,
 } = require("../controllers/userControllers");
-const { validateUser, validatePassword } = require("../middleware/validation");
+const { userValidationRules, userValidationErrorHandling } = require("../middleware/validation");
+const { addOrder } = require("../controllers/orderControllers")
 
 userRouters
   .route("/")
   .get(getUsers)
-  .post(validateUser, validatePassword, addUser);
+  .post(userValidationRules(), userValidationErrorHandling, addUser);
 userRouters
   .route("/:id")
   .get(getUser)
   .put(updateUserAvatar)
   .put(updateUserInformation);
+
+userRouters
+  .route("/:id/order")
+  .post(addOrder)
 
 module.exports = userRouters;
