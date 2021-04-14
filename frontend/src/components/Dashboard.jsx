@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { GetRecord } from "../helpers/fetch";
+import { addRecord, GetRecord } from "../helpers/fetch";
 import { useDispatch } from "react-redux";
 import { show } from "../actions/recordActions";
+import { addItem } from "../actions/basketActions";
 
 const FlexWrap = styled.div`
   display: flex;
@@ -71,6 +72,19 @@ const Dashboard = () => {
     }
   }, []);
 
+  const orderHandler = async (record) => {
+    try {
+      const result = await addRecord(record);
+      if (!result) {
+        setError(result)
+        return
+      }
+      dispatch(addItem(result))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <FlexWrap>
       <h3>Dashboard</h3>
@@ -86,7 +100,7 @@ const Dashboard = () => {
               return (
                 <GridItems key={record._id}>
                   <GridImage src={record.cover} alt="Record-Cover" />
-                  <Button>+</Button>
+                  <Button onClick={orderHandler(record)}>+</Button>
                 </GridItems>
               );
             })}

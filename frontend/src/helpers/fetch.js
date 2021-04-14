@@ -15,11 +15,13 @@ export const GetRecord = async () => {
 export const GetUser = async (data) => {
   try {
     const res = await axios.post(`/login`, data);
-    console.log("get user res =>", res);
+    console.log("get user res =>", res.data);
     return res.data;
   } catch (err) {
-    console.log(err);
-    return err;
+    console.log('ERRORRRR',err.response);
+    const errorMsg = err.response && err.response.data;
+    return errorMsg || {error: "Wrong Username and Password"};
+
   }
 };
 
@@ -60,5 +62,35 @@ export const authenticateUser = async () => {
     let error = "eroooorororororo";
     console.log(error);
     return error;
+  }
+};
+
+// Basket fetch request
+export const addRecord = async (record) => {
+  try {
+    const newRecord = await axios.post(`me/basket`, record);
+    console.log("new record res =>", newRecord);
+    return newRecord;
+  } catch (err) {
+    console.log(err.response.data);
+  }
+};
+export const removeRecord = async (id) => {
+  try {
+    const removedRecord = await axios.delete(`me/basket`, id);
+    console.log("new record res =>", removedRecord);
+    return removedRecord;
+  } catch (err) {
+    console.log(err.response.data);
+  }
+};
+
+export const removeAll = async () => {
+  try {
+    const emptiedBasket = await axios.delete(`me/basket`);
+    console.log("new record res =>", emptiedBasket);
+    return emptiedBasket;
+  } catch (err) {
+    console.log(err.response.data);
   }
 };

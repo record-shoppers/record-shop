@@ -9,6 +9,7 @@ import { UserProfile } from "../components/UserProfile";
 import { NotFound404 } from "../components/NotFound404";
 import { PrivateRoute } from "../components/PrivateRoute";
 import "../css/App.css";
+import { Basket } from "../components/Basket";
 
 const Routers = () => {
   const loggedin = useSelector((state) => state.loginReducer.loggedin);
@@ -18,6 +19,7 @@ const Routers = () => {
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/userprofile" component={UserProfile} />
+        <PrivateRoute path="/basket" component={Basket} />
         <Route path="/" exact component={Landingpage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
