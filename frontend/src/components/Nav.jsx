@@ -67,6 +67,8 @@ const ItemQuantity = styled.div`
   border-radius: 50%;
   height: 12px;
   width: 12px;
+  font-size: 10px;
+  text-align: center;
 `;
 
 const Nav = () => {
@@ -93,10 +95,12 @@ const Nav = () => {
 
         {user ? (
           <UserSelection>
-            <ShoppingCart>
-              <MdShoppingCart />
-              <ItemQuantity>{}</ItemQuantity>
-            </ShoppingCart>
+            <Link to="basket">
+              <ShoppingCart>
+                <MdShoppingCart />
+                <ItemQuantity>3</ItemQuantity>
+              </ShoppingCart>
+            </Link>
             <UserAvatar
               src={picture}
               className="selected-pic"
