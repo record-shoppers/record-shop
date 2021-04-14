@@ -10,14 +10,14 @@ exports.checkUser = async (req, res, next) => {
     if (!user) {
       let error = new Error(`Entered incorrect email`);
       error.status = 200;
-      throw error
+      return next(error);
     }
     
     const pwCompareResult = bcryptjs.compareSync(password, user.password);
     if (!pwCompareResult) {
       let error = new Error('Wrong password');
       error.status = 401
-      throw error;
+      return next(error);
     }
     
     console.log("user", user);
