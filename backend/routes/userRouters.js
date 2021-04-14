@@ -7,8 +7,15 @@ const {
   updateUserInformation,
   updateUserAvatar,
 } = require("../controllers/userControllers");
-const { userValidationRules, userValidationErrorHandling } = require("../middleware/validation");
-const { addOrder } = require("../controllers/orderControllers")
+const {
+  userValidationRules,
+  userValidationErrorHandling,
+} = require("../middleware/validation");
+
+const {
+  addRecord,
+  deleteAllRecords,
+} = require("../controllers/orderControllers");
 
 userRouters
   .route("/")
@@ -20,8 +27,8 @@ userRouters
   .put(updateUserAvatar)
   .put(updateUserInformation);
 
-userRouters
-  .route("/:id/order")
-  .post(addOrder)
+userRouters.route("/:id/basket").post(addRecord);
+
+userRouters.route("/delete").delete(deleteAllRecords);
 
 module.exports = userRouters;

@@ -21,12 +21,12 @@ export const PrivateRoute = ({ path, component, redirectTo = "/login" }) => {
       try {
         // /me/auth
         const result = await authenticateUser();
-        dispatch(authUser(result));
         console.log("result => ", result);
         if (result.error) {
           setAuthIsDone(true);
           return;
         }
+        dispatch(authUser(result));
 
         setAuthIsDone(true);
       } catch (error) {}
