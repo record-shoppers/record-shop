@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { addRecord, GetRecord } from "../helpers/fetch";
+import { GetRecord } from "../helpers/fetch";
 import { useDispatch } from "react-redux";
 import { show } from "../actions/recordActions";
 import { addItem } from "../actions/basketActions";
+import { setItemInStoreage } from "../helpers/localStoreage";
 
 const FlexWrap = styled.div`
   display: flex;
@@ -72,19 +73,9 @@ const Dashboard = () => {
     }
   }, []);
 
-  const orderHandler = async (record) => {
-    const records = [{ recordID: record._id, quantity: 1 }];
-
-    try {
-      const result = await addRecord(records, user._id);
-      if (!result) {
-        setError(result);
-        return;
-      }
-      // dispatch(addItem(result));
-    } catch (error) {
-      console.log(error);
-    }
+  const orderHandler = (record) => {
+    const records = { recordID: record._id, qty: 1 };
+    dispatch(addItem(records));
   };
 
   return (

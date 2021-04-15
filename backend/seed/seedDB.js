@@ -4,15 +4,14 @@ const Record = require("../models/Record");
 const Basket = require("../models/Basket");
 const faker = require("faker");
 
-
 (async function () {
-  const strConn = `mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
+  const strConn = `mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`;
   mongoose.connect(strConn, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true,
-  })
+  });
 
   mongoose.connection.on("error", () =>
     console.log("Cannot connect to the DB")
@@ -30,7 +29,6 @@ const faker = require("faker");
   } catch (error) {
     console.log(error);
   }
-  
 
   //CREATE 10 FAKE USERS
   const userPromises = Array(10)
@@ -48,7 +46,7 @@ const faker = require("faker");
       return user.save();
     });
 
-    let users;
+  let users;
   try {
     users = await Promise.all(userPromises);
     console.log("We stored 20 users in the DB");
@@ -71,7 +69,7 @@ const faker = require("faker");
       const record = new Record(recordData);
       return record.save();
     });
-    let records;
+  let records;
   try {
     records = await Promise.all(recordsPromises);
     console.log("We stored 10 records in the DB");
@@ -79,27 +77,26 @@ const faker = require("faker");
     console.log(error);
   }
 
-
-  const basketPromises = Array(10)
-    .fill(null)
-    .map(() => {
-      const basketData = {
-        records: [
-          {
-            recordID: records[0],
-            quantity: 1,
-          }],
-        userID: users[0],
-      };
-      const basket = new Basket(basketData);
-      return basket.save();
-    });
-  try {
-    await Promise.all(basketPromises);
-    console.log("We stored 20 users in the DB");
-  } catch (error) {
-    console.log(error);
-  }
+  //const basketPromises = Array(10)
+  //  .fill(null)
+  //  .map(() => {
+  //    const basketData = {
+  //      records: [
+  //        {
+  //          recordID: records[0],
+  //          quantity: 1,
+  //        }],
+  //      userID: users[0],
+  //    };
+  //    const basket = new Basket(basketData);
+  //    return basket.save();
+  //  });
+  //try {
+  //  await Promise.all(basketPromises);
+  //  console.log("We stored 20 users in the DB");
+  //} catch (error) {
+  //  console.log(error);
+  //}
 
   mongoose.connection.close();
 })();
