@@ -15,6 +15,7 @@ const UserSchema = new Schema(
       type: String,
       default: "http://localhost:5001/statics/avatar.jpg",
     },
+    // purchased: [type: ] 
   },
   { versionKey: false, timestamps: true }
 );

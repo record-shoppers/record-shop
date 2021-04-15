@@ -1,17 +1,18 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Record = require("../models/Record");
+const Basket = require("../models/Basket");
 const faker = require("faker");
 
 
-(async function (){
-    const strConn =`mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
-    mongoose.connect(strConn, {
-        useNewUrlParser:true,
-        useUnifiedTopology:true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-    })
+(async function () {
+  const strConn = `mongodb://guderian:Colore12@cluster0-shard-00-02.9of72.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-czzf89-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
+  mongoose.connect(strConn, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
 
   mongoose.connection.on("error", () =>
     console.log("Cannot connect to the DB")
@@ -23,18 +24,13 @@ const faker = require("faker");
   //DROP USERS
   try {
     await User.deleteMany({});
-    console.log("Old Users deleted");
-  } catch (error) {
-    console.log(error);
-  }
-
-  //DROP RECORDS
-  try {
+    await Basket.deleteMany({});
     await Record.deleteMany({});
-    console.log("Old Records deleted");
+    console.log("Old Stuff deleted");
   } catch (error) {
     console.log(error);
   }
+  
 
   //CREATE 10 FAKE USERS
   const userPromises = Array(10)
@@ -51,8 +47,10 @@ const faker = require("faker");
       const user = new User(userData);
       return user.save();
     });
+
+    let users;
   try {
-    await Promise.all(userPromises);
+    users = await Promise.all(userPromises);
     console.log("We stored 20 users in the DB");
   } catch (error) {
     console.log(error);
@@ -73,9 +71,32 @@ const faker = require("faker");
       const record = new Record(recordData);
       return record.save();
     });
+    let records;
   try {
-    await Promise.all(recordsPromises);
+    records = await Promise.all(recordsPromises);
     console.log("We stored 10 records in the DB");
+  } catch (error) {
+    console.log(error);
+  }
+
+
+  const basketPromises = Array(10)
+    .fill(null)
+    .map(() => {
+      const basketData = {
+        records: [
+          {
+            recordID: records[0],
+            quantity: 1,
+          }],
+        userID: users[0],
+      };
+      const basket = new Basket(basketData);
+      return basket.save();
+    });
+  try {
+    await Promise.all(basketPromises);
+    console.log("We stored 20 users in the DB");
   } catch (error) {
     console.log(error);
   }
