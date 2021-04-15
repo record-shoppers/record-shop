@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem } from "../actions/basketActions";
 import styled from "styled-components";
 import HeinekenImage from "../assets/Heineken.png";
+import { placeOrder } from "../helpers/fetch";
 
 export const Basket = () => {
   const BasketContainer = styled.div`
@@ -103,7 +104,25 @@ export const Basket = () => {
   `;
 
   const records = useSelector((state) => state.basketReducer.records);
+  const user = useSelector((state) => state.loginReducer.user);
   const dispatch = useDispatch();
+  console.log(records);
+
+  const buyNow = async (records) => {
+    try {
+      const newRecordObj = records.map((record) => {
+        return {recordID: record._id, quantity: record.qty}
+      })
+      const result = await placeOrder(newRecordObj, user._id)
+      return result;
+    } catch (error) {
+      
+    }
+  }
+
+  const totalPrice = records.reduce((acc, record) => {
+    return acc += record.price * record.qty
+  },0)
   console.log("this =>", records);
   const basketItems = records.map((record) => {
     return (
@@ -150,9 +169,9 @@ export const Basket = () => {
           <ImageHeineken src={HeinekenImage} alt="Heineken Beer On Fire" />
           <OrderTotal>
             <h5>Order Total</h5>
-            <h2>Price $</h2>
+            <h2>{totalPrice} $</h2>
           </OrderTotal>
-          <OrderButton>Buy Now</OrderButton>
+          <OrderButton onClick={()=> buyNow(records)}>Buy Now</OrderButton>
           <small>
             Buy your order now and get a small alcohol free Heineken on fire!
           </small>
