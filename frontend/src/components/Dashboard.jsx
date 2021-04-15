@@ -74,8 +74,8 @@ const Dashboard = () => {
   }, []);
 
   const orderHandler = (record) => {
-    const records = { recordID: record._id, qty: 1 };
-    dispatch(addItem(records));
+    console.log("added recordrd", record);
+    dispatch(addItem(record));
   };
 
   return (

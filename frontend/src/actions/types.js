@@ -6,6 +6,5 @@ export const ACTION = {
   ADD_ITEM: "add-item",
   REMOVE_ITEM: "remove-item",
   REMOVE_ALL: "remove-all",
-  INCREMENT_ITEM: "increment-item",
-  DECREMENT_ITEM: "decrement-item",
+  ADD_INITIAL_STATE: "add-initial-state",
 };

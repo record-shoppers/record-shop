@@ -74,10 +74,25 @@ const ItemQuantity = styled.div`
 const Nav = () => {
   const user = useSelector((state) => state.loginReducer.user);
   const picture = useSelector((state) => state.profileReducer);
+  const records = useSelector((state) => state.recordReducer.records);
+  console.log(records);
   const history = useHistory();
 
   const goToProfile = () => {
     history.push("/userprofile");
+  };
+
+  const getRecordQaunity = (records) => {
+    try {
+      return (
+        records.reduce((acc, record) => {
+          return (acc += record.qty);
+        }, 0) || 0
+      );
+    } catch (err) {
+      console.log(err);
+      return 0;
+    }
   };
 
   return (
@@ -98,7 +113,7 @@ const Nav = () => {
             <Link to="basket">
               <ShoppingCart>
                 <MdShoppingCart />
-                <ItemQuantity>3</ItemQuantity>
+                <ItemQuantity>{getRecordQaunity(records)}</ItemQuantity>
               </ShoppingCart>
             </Link>
             <UserAvatar

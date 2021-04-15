@@ -2,8 +2,9 @@ import { Redirect, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { authenticateUser } from "../helpers/fetch";
-
+import { loadEntryFromStorage } from "../helpers/localStoreage";
 import { authUser } from "../actions/loginAction";
+import { addInitialState } from "../actions/basketActions";
 
 export const PrivateRoute = ({ path, component, redirectTo = "/login" }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,12 @@ export const PrivateRoute = ({ path, component, redirectTo = "/login" }) => {
           return;
         }
         dispatch(authUser(result));
-
+        //getting items from local storage and adding them to redux
+        const orders = loadEntryFromStorage("order");
+        console.log(orders);
+        if (orders) {
+          dispatch(addInitialState(orders));
+        }
         setAuthIsDone(true);
       } catch (error) {}
     };

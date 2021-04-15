@@ -1,5 +1,5 @@
 import { ACTION } from "../actions/types";
-import { setItemInStorage } from "../helpers/localStoreage";
+import { setItemInStorage, clearItemInStorage } from "../helpers/localStoreage";
 
 const initialState = {
   records: [],
@@ -7,57 +7,56 @@ const initialState = {
 
 export const basketReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTION.ADD_INITIAL_STATE:
+      console.log(action.payload);
+      return (state = { ...action.payload });
     case ACTION.ADD_ITEM:
       const exist = state.records.find((record) => {
         console.log("record =>", record);
-        return record.recordID === action.payload.recordID;
+        return record._id === action.payload._id;
       });
 
-      console.log("exist is false", action.payload.recordID);
+      console.log("exist is false", action.payload._id);
       if (!exist) {
         const newItem = {
           ...state,
-          records: [...state.records, action.payload],
+          records: [...state.records, { ...action.payload, qty: 1 }],
         };
         setItemInStorage("order", newItem);
         return newItem;
       } else {
-        const modifiedItem = {
+        const modifiedItems = {
           ...state,
           records: state.records.map((record) =>
-            record.recordID === action.payload.recordID
+            record._id === action.payload._id
               ? { ...record, qty: record.qty + 1 }
               : { ...record }
           ),
         };
-        setItemInStorage("order", modifiedItem);
-        return modifiedItem;
+        setItemInStorage("order", modifiedItems);
+        return modifiedItems;
       }
-    case ACTION.DECREMENT_ITEM:
-      return {
+    case ACTION.REMOVE_ITEM:
+      const modifiedItems = {
         ...state,
         records: state.records.map((record) =>
-          record.id === action.payload.id
+          record._id === action.payload._id
             ? {
                 ...record,
-                qty: record.qty > 1 ? record.qty - 1 : (record.qty = 1),
+                qty: record.qty - 1,
               }
             : { ...record }
         ),
       };
-    case ACTION.INCREMENT_ITEM:
-      return {
-        ...state,
-        records: state.records.map(
-          (record) => record.id === action.payload.id && record.qty++
-        ),
+      const filteredItems = {
+        ...modifiedItems,
+        records: modifiedItems.records.filter((record) => record.qty > 0),
       };
-    case ACTION.REMOVE_ITEM:
-      return {
-        ...state,
-        records: state.records.filter((record) => record.id !== action.payload),
-      };
+      console.log(filteredItems);
+      setItemInStorage("order", filteredItems);
+      return filteredItems;
     case ACTION.REMOVE_ALL:
+      clearItemInStorage("order");
       return {
         ...state,
         records: [],

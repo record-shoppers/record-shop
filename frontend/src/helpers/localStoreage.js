@@ -1,6 +1,8 @@
 // GENERAL LOCAL STORAGE HANDLERS
 export const loadEntryFromStorage = (key) => {
   const userString = localStorage.getItem(key);
+
+  console.log("userStr", userString);
   // if item was found in localStorage => parse string into user object
   return userString && JSON.parse(userString);
 };
