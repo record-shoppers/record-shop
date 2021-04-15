@@ -7,6 +7,7 @@ const userRouters = require("./routes/userRouters");
 const recordRouters = require("./routes/recordRouters");
 const loginRouters = require("./routes/loginRouters");
 const meRouters = require("./routes/meRouters");
+const basketRouters = require("./routes/basketRouters");
 const PORT = 5001;
 require("dotenv").config();
 
@@ -44,8 +45,10 @@ app.use("/users", userRouters);
 app.use("/records", recordRouters);
 app.use("/login", loginRouters);
 app.use("/me", meRouters);
+app.use("/basket", basketRouters);
 
 // ERROR HANDLER
 app.use(function errorHandler(err, req, res, next) {
+  console.log(err);
   res.status(err.status || 500).send({ error: { message: err.message } });
 });

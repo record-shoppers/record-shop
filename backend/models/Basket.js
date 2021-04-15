@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {model, Schema} = mongoose;
 
 
-const OrderSchema = new Schema({
+const BasketSchema = new Schema({
     records: [
         {_id: false, recordID:
             { 
@@ -13,13 +13,12 @@ const OrderSchema = new Schema({
             quantity: Number
         }],
     userID: {type: Schema.Types.ObjectId, required: true},
-    paymentMethod: {type: String, default: 'PayPal'}
 }, {
     versionKey: false,
     timestamps: true
 });
 
-OrderSchema.virtual('TotalPrice').get(function() {
+BasketSchema.virtual('TotalPrice').get(function() {
     return this.records.reducer((acc, item) => {
         if (item.price) {
             acc += item.price;
@@ -29,6 +28,6 @@ OrderSchema.virtual('TotalPrice').get(function() {
 
 })
 
-const Order = model('Order', OrderSchema);
+const Basket = model('Basket', BasketSchema);
 
-module.exports = Order;
+module.exports = Basket;
