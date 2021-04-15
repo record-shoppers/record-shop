@@ -74,8 +74,8 @@ const ItemQuantity = styled.div`
 const Nav = () => {
   const user = useSelector((state) => state.loginReducer.user);
   const picture = useSelector((state) => state.profileReducer);
-  const records = useSelector((state) => state.recordReducer.records);
-  console.log(records);
+  const basketItems = useSelector((state) => state.basketReducer.records);
+  console.log(basketItems);
   const history = useHistory();
 
   const goToProfile = () => {
@@ -94,7 +94,8 @@ const Nav = () => {
       return 0;
     }
   };
-
+  
+  console.log('quantity', getRecordQaunity());
   return (
     <nav>
       <NavUl>
@@ -113,7 +114,7 @@ const Nav = () => {
             <Link to="basket">
               <ShoppingCart>
                 <MdShoppingCart />
-                <ItemQuantity>{getRecordQaunity(records)}</ItemQuantity>
+                <ItemQuantity>{getRecordQaunity(basketItems)}</ItemQuantity>
               </ShoppingCart>
             </Link>
             <UserAvatar

@@ -14,8 +14,8 @@ const {
 
 const {
   addRecord,
-  deleteAllRecords,
-} = require("../controllers/basketControllers");
+  // deleteAllRecords,
+} = require("../controllers/orderControllers");
 
 userRouters
   .route("/")
@@ -27,7 +27,7 @@ userRouters
   .put(updateUserAvatar)
   .put(updateUserInformation);
 
-userRouters.route("/:userID/basket/:basketID").post(addRecord);
-userRouters.route("/delete").delete(deleteAllRecords);
+userRouters.route("/:userID/orders").post(addRecord);
+// userRouters.route("/delete").delete(deleteAllRecords);
 
 module.exports = userRouters;

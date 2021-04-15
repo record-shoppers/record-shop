@@ -65,9 +65,9 @@ export const authenticateUser = async () => {
 };
 
 // Basket fetch request
-export const addRecord = async (record, id) => {
+export const placeOrder = async (record, id) => {
   try {
-    const newRecord = await axios.post(`users/${id}/basket`, record);
+    const newRecord = await axios.post(`users/${id}/orders`, record);
     console.log("new record res =>", newRecord);
     return newRecord;
   } catch (err) {
@@ -75,22 +75,22 @@ export const addRecord = async (record, id) => {
   }
 };
 
-export const removeRecord = async (id) => {
-  try {
-    const removedRecord = await axios.delete(`me/basket`, id);
-    console.log("new record res =>", removedRecord);
-    return removedRecord;
-  } catch (err) {
-    console.log(err.response.data);
-  }
-};
+// export const removeRecord = async (id) => {
+//   try {
+//     const removedRecord = await axios.delete(`me/basket`, id);
+//     console.log("new record res =>", removedRecord);
+//     return removedRecord;
+//   } catch (err) {
+//     console.log(err.response.data);
+//   }
+// };
 
-export const removeAll = async () => {
-  try {
-    const emptiedBasket = await axios.delete(`me/basket`);
-    console.log("new record res =>", emptiedBasket);
-    return emptiedBasket;
-  } catch (err) {
-    console.log(err.response.data);
-  }
-};
+// export const removeAll = async () => {
+//   try {
+//     const emptiedBasket = await axios.delete(`me/basket`);
+//     console.log("new record res =>", emptiedBasket);
+//     return emptiedBasket;
+//   } catch (err) {
+//     console.log(err.response.data);
+//   }
+// };
