@@ -7,4 +7,5 @@ export const ACTION = {
   REMOVE_ITEM: "remove-item",
   REMOVE_ALL: "remove-all",
   ADD_INITIAL_STATE: "add-initial-state",
+  USER_LOGOUT: "userLogout",
 };

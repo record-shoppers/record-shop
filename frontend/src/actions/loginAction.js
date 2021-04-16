@@ -7,3 +7,7 @@ export const loginUser = (user) => {
 export const authUser = (result) => {
   return { type: ACTION.AUTH, payload: result };
 };
+
+export const userLogout = () => {
+  return { type: ACTION.USER_LOGOUT };
+};

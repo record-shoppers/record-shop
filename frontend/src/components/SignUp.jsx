@@ -24,14 +24,12 @@ export const SignUp = () => {
   const onSubmit = async (formData) => {
     if (formData.password === formData.confirmPassword) {
       const newUser = await addUser(formData);
-      console.log(newUser);
       dispatch(loginUser(newUser.data));
       if (newUser) history.push("/userprofile");
       reset();
     } else {
       setMatchingPassword(false);
     }
-    console.log(matchingPassword);
   };
 
   return (

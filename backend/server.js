@@ -7,6 +7,7 @@ const userRouters = require("./routes/userRouters");
 const recordRouters = require("./routes/recordRouters");
 const loginRouters = require("./routes/loginRouters");
 const meRouters = require("./routes/meRouters");
+const logoutRouters = require("./routes/logoutRouters");
 const PORT = 5001;
 require("dotenv").config();
 
@@ -43,6 +44,7 @@ app.listen(PORT, () => {
 app.use("/users", userRouters);
 app.use("/records", recordRouters);
 app.use("/login", loginRouters);
+app.use("/logout", logoutRouters);
 app.use("/me", meRouters);
 
 // ERROR HANDLER

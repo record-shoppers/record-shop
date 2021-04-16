@@ -86,7 +86,6 @@ export const UserProfile = () => {
     }
 
     let updatedInformation = await updateInformation(user._id, userInformation);
-    console.log(updatedInformation);
     dispatch(loginUser(updatedInformation.data));
   };
 

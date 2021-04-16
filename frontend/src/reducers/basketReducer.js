@@ -8,15 +8,12 @@ const initialState = {
 export const basketReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTION.ADD_INITIAL_STATE:
-      console.log(action.payload);
       return (state = { ...action.payload });
     case ACTION.ADD_ITEM:
       const exist = state.records.find((record) => {
-        console.log("record =>", record);
         return record._id === action.payload._id;
       });
 
-      console.log("exist is false", action.payload._id);
       if (!exist) {
         const newItem = {
           ...state,
@@ -52,7 +49,6 @@ export const basketReducer = (state = initialState, action) => {
         ...modifiedItems,
         records: modifiedItems.records.filter((record) => record.qty > 0),
       };
-      console.log(filteredItems);
       setItemInStorage("order", filteredItems);
       return filteredItems;
     case ACTION.REMOVE_ALL:

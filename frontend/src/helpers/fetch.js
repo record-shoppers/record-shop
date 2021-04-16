@@ -15,7 +15,6 @@ export const GetRecord = async () => {
 export const GetUser = async (data) => {
   try {
     const res = await axios.post(`/login`, data);
-    console.log("get user res =>", res.data);
     return res.data;
   } catch (err) {
     console.log("ERRORRRR", err.response);
@@ -46,7 +45,6 @@ export const updateAvatar = async (id, avatar) => {
 export const updateInformation = async (id, information) => {
   try {
     const informationUpdated = await axios.put(`/users/${id}`, information);
-    console.log("get user res =>", informationUpdated);
     return informationUpdated;
   } catch (err) {
     console.log(err.response.data);
@@ -68,7 +66,6 @@ export const authenticateUser = async () => {
 export const placeOrder = async (record, id) => {
   try {
     const newRecord = await axios.post(`users/${id}/orders`, record);
-    console.log("new record res =>", newRecord);
     return newRecord;
   } catch (err) {
     console.log(err.response.data);
@@ -77,13 +74,22 @@ export const placeOrder = async (record, id) => {
 
 export const getPreOrders = async (id) => {
   try {
-    const preOrders = await axios.get(`/users/${id}/orders`)
-    console.log('preOrders', preOrders);
-    return preOrders.data
+    const preOrders = await axios.get(`/users/${id}/orders`);
+    console.log("preOrders", preOrders);
+    return preOrders.data;
   } catch (err) {
     console.log(err.response.data);
   }
-}
+};
+
+export const logoutUser = async () => {
+  try {
+    const logout = await axios.get("/logout");
+    return logout;
+  } catch (err) {
+    console.log(err.response.data);
+  }
+};
 
 // export const removeRecord = async (id) => {
 //   try {

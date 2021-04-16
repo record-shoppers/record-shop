@@ -1,8 +1,9 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { MdShoppingCart } from "react-icons/md";
+import { UserDropdown } from "./UserDropdown";
 
 const NavUl = styled.ul`
   background-color: #f2f2f2;
@@ -75,11 +76,11 @@ const Nav = () => {
   const user = useSelector((state) => state.loginReducer.user);
   const picture = useSelector((state) => state.profileReducer);
   const basketItems = useSelector((state) => state.basketReducer.records);
-  console.log(basketItems);
-  const history = useHistory();
 
-  const goToProfile = () => {
-    history.push("/userprofile");
+  const [dropdown, setDropdown] = useState(false);
+
+  const handleAvatarClick = () => {
+    setDropdown(!dropdown);
   };
 
   const getRecordQaunity = (records) => {
@@ -94,8 +95,7 @@ const Nav = () => {
       return 0;
     }
   };
-  
-  console.log('quantity', getRecordQaunity());
+
   return (
     <nav>
       <NavUl>
@@ -121,8 +121,9 @@ const Nav = () => {
               src={picture}
               className="selected-pic"
               alt="Profile Picture"
-              onClick={goToProfile}
+              onClick={handleAvatarClick}
             />
+            <UserDropdown dropdown={dropdown} />
           </UserSelection>
         ) : (
           <LoginSignup>

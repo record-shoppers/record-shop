@@ -17,12 +17,10 @@ export const PrivateRoute = ({ path, component, redirectTo = "/login" }) => {
 
   // last thing to get executed (after all components have been rendered already)
   useEffect(() => {
-    console.log("Context is trying to authenticate the user");
     const authMe = async () => {
       try {
         // /me/auth
         const result = await authenticateUser();
-        console.log("result => ", result);
         if (result.error) {
           setAuthIsDone(true);
           return;
@@ -30,7 +28,6 @@ export const PrivateRoute = ({ path, component, redirectTo = "/login" }) => {
         dispatch(authUser(result));
         //getting items from local storage and adding them to redux
         const orders = loadEntryFromStorage("order");
-        console.log(orders);
         if (orders) {
           dispatch(addInitialState(orders));
         }

@@ -27,7 +27,6 @@ export const Login = () => {
     setErrorState("");
     try {
       let user = await GetUser(data);
-      console.log("this is the user",user);
       if (!user.error) {
         dispatch(loginUser(user));
         history.push("/dashboard");
