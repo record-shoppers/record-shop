@@ -14,6 +14,7 @@ const {
 
 const {
   addRecord,
+  getPreOrders,
   // deleteAllRecords,
 } = require("../controllers/orderControllers");
 
@@ -27,7 +28,7 @@ userRouters
   .put(updateUserAvatar)
   .put(updateUserInformation);
 
-userRouters.route("/:userID/orders").post(addRecord);
+userRouters.route("/:userID/orders").post(addRecord).get(getPreOrders);
 // userRouters.route("/delete").delete(deleteAllRecords);
 
 module.exports = userRouters;

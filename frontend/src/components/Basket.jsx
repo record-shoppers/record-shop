@@ -1,130 +1,77 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addItem, removeItem } from "../actions/basketActions";
-import styled from "styled-components";
+import { addItem, removeAll, removeItem } from "../actions/basketActions";
 import HeinekenImage from "../assets/Heineken.png";
-import { placeOrder } from "../helpers/fetch";
+import { getPreOrders, placeOrder } from "../helpers/fetch";
+import {SubBasket} from './SubBasket';
+import {
+  BasketContainer,
+  OrderContainer,
+  BasketItems,
+  BasketTotal,
+  BasketItemCard,
+  ItemImage,
+  BasketItemsDesc,
+  Controllers,
+  Control,
+  ImageHeineken,
+  OrderTotal,
+  OrderButton,
+  PreviousOrders,
+  PreOrderInfo,
+  PreviousOrderTitle
+} from "../css/BasketStyles"
 
 export const Basket = () => {
-  const BasketContainer = styled.div`
-    margin-top: 40px;
-    padding: 20px;
-  `;
-
-  const OrderContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 500px;
-  `;
-
-  const BasketItems = styled.section`
-    /* height: 400px; */
-    width: ${(props) => props.width};
-    overflow: scroll;
-  `;
-
-  const BasketTotal = styled.section`
-    /* height: 400px; */
-    width: 49%;
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 250px;
-    text-align: center;
-  `;
-
-  const BasketItemCard = styled.div`
-    display: flex;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: black;
-    height: 150px;
-  `;
-
-  const ItemImage = styled.img`
-    height: 100%;
-    width: 40%;
-  `;
-
-  const BasketItemsDesc = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding-left: 10px;
-    color: white;
-  `;
-
-  const Controllers = styled.div`
-    display: flex;
-    margin-top: 10px;
-  `;
-
-  const Control = styled.div`
-    background-color: ${(props) => props.backgroundColor};
-    color: ${(props) => props.color};
-    border: 1px solid ${(props) => props.color};
-    border-radius: 50%;
-    height: 16px;
-    width: 16px;
-    font-size: 16px;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `;
-
-  const ImageHeineken = styled.img`
-    height: 150px;
-    width: 100px;
-  `;
-
-  const OrderTotal = styled.div`
-    margin-top: 20px;
-  `;
-
-  const OrderButton = styled.button`
-    display: block;
-    margin: 20px 0;
-    background-color: #eea668;
-    color: #ffff;
-  `;
-
-  const PreviousOrders = styled.div``;
-  const PreOrderInfo = styled.div`
-    display: flex;
-    justify-content: space-between;
-  `;
-
-  const PreviousOrderTitle = styled.h3`
-    margin: 50px 0;
-  `;
 
   const records = useSelector((state) => state.basketReducer.records);
   const user = useSelector((state) => state.loginReducer.user);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [preOrders, setPreOrders] = useState([]);
   const dispatch = useDispatch();
   console.log(records);
+
+  useEffect(() => {
+    setLoading(true);
+    setError("");
+    try {
+      const getData = async () => {
+        let res = await getPreOrders();
+        console.log('res', res);
+        setPreOrders(res)
+        setLoading(false);
+      };
+      getData();
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+      setError(err);
+    }
+   
+  }, [preOrders])
 
   const buyNow = async (records) => {
     try {
       const newRecordObj = records.map((record) => {
-        return {recordID: record._id, quantity: record.qty}
+        return { recordID: record._id, quantity: record.qty }
       })
       const result = await placeOrder(newRecordObj, user._id)
+      console.log('the thing we are looking for', result);
+      dispatch(removeAll())
       return result;
     } catch (error) {
-      
+      setError("catch block error, There was a problem with your order please try again later!")
+      return
     }
   }
 
   const totalPrice = records.reduce((acc, record) => {
     return acc += record.price * record.qty
-  },0)
+  }, 0)
   console.log("this =>", records);
-  const basketItems = records.map((record) => {
+const displayOrderList = (data) => {
+    return data.map((record) => {
     return (
       <BasketItemCard>
         <ItemImage src={record.cover} alt="Record Cover" />
@@ -157,21 +104,22 @@ export const Basket = () => {
       </BasketItemCard>
     );
   });
-
+}
   return (
     <BasketContainer>
       <h2>Cart!</h2>
       <p>Gives us all your money!</p>
       <h4>currently in your cart</h4>
+      {error && <h4>{error}</h4>}
       <OrderContainer>
-        <BasketItems width="49%">{basketItems}</BasketItems>
+        <BasketItems width="49%">{displayOrderList(records)}</BasketItems>
         <BasketTotal>
           <ImageHeineken src={HeinekenImage} alt="Heineken Beer On Fire" />
           <OrderTotal>
             <h5>Order Total</h5>
             <h2>{totalPrice} $</h2>
           </OrderTotal>
-          <OrderButton onClick={()=> buyNow(records)}>Buy Now</OrderButton>
+          <OrderButton onClick={() => buyNow(records)}>Buy Now</OrderButton>
           <small>
             Buy your order now and get a small alcohol free Heineken on fire!
           </small>
@@ -179,11 +127,7 @@ export const Basket = () => {
       </OrderContainer>
       <PreviousOrderTitle>Previous Orders</PreviousOrderTitle>
       <PreviousOrders>
-        <PreOrderInfo>
-          <div>14/04/2021</div>
-          <div>59.2$</div>
-        </PreOrderInfo>
-        <BasketItems width="100%">{basketItems}</BasketItems>
+        <SubBasket data={preOrders}/>
       </PreviousOrders>
     </BasketContainer>
   );
