@@ -75,6 +75,16 @@ export const placeOrder = async (record, id) => {
   }
 };
 
+export const getPreOrders = async (id) => {
+  try {
+    const preOrders = await axios.get(`/users/${id}/orders`)
+    console.log('preOrders', preOrders);
+    return preOrders.data
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}
+
 // export const removeRecord = async (id) => {
 //   try {
 //     const removedRecord = await axios.delete(`me/basket`, id);

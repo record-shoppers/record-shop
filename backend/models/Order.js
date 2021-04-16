@@ -16,17 +16,16 @@ const OrderSchema = new Schema({
     paymentMethod: {type: String, default: 'PayPal'}
 }, {
     versionKey: false,
-    timestamps: true
+    timestamps: true,
+   toJSON: {virtuals: true}
 });
 
 OrderSchema.virtual('TotalPrice').get(function() {
-    return this.records.reducer((acc, item) => {
-        if (item.price) {
-            acc += item.price;
-        }
-        return acc;
+    console.log('this is this', this.records);
+  const totalPrice = this.records.reduce((acc, item) => {
+        return acc += item.recordID.price * item.quantity;
     }, 0)
-
+    return totalPrice
 })
 
 const Order = model('Order', OrderSchema);

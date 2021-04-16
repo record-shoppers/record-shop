@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Record = require("../models/Record");
-const Basket = require("../models/Basket");
+const Order = require("../models/Order");
 const faker = require("faker");
 
 (async function () {
@@ -23,7 +23,7 @@ const faker = require("faker");
   //DROP USERS
   try {
     await User.deleteMany({});
-    await Basket.deleteMany({});
+    await Order.deleteMany({});
     await Record.deleteMany({});
     console.log("Old Stuff deleted");
   } catch (error) {
@@ -63,7 +63,7 @@ const faker = require("faker");
         title: faker.lorem.words(),
         artist: faker.lorem.word(),
         year: faker.date.past(),
-        price: faker.commerce.price(),
+        price: 9.99,
       };
 
       const record = new Record(recordData);
